@@ -1,0 +1,25 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "eventosApp",
+    "buildTool": "maven",
+    "cacheProvider": "ehcache",
+    "clientFramework": "react",
+    "creationTimestamp": 1763063003695,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "enableHibernateCache": true,
+    "enableTranslation": true,
+    "entities": [],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YzNiYWNmZjdhYWI2MDdhM2U0YTFlODU0OTU2YTIxNGU4NmNiODdkNjE2NzZiZDBjZmY5ZWNlY2MzOGExNGY1YTAxMThkN2JjYWUzMTFhNjAzNjZhYmExM2NlMWI3Y2YzMGZiNDAwZDJiOWNhNzM2YmNmZWYwMmE4NDY5Y2Q2MGY=",
+    "languages": ["es", "en"],
+    "monorepository": true,
+    "nativeLanguage": "es",
+    "packageName": "ar.edu.um.programacion2.marcosibarra",
+    "prodDatabaseType": "mysql",
+    "skipCommitHook": true,
+    "withAdminUi": true
+  }
+}

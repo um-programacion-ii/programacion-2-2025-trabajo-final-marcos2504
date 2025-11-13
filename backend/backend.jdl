@@ -1,0 +1,89 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName eventosApp
+    packageName ar.edu.um.programacion2.marcosibarra
+    buildTool maven
+    databaseType sql
+    devDatabaseType h2Disk
+    prodDatabaseType mysql
+    cacheProvider ehcache
+    enableHibernateCache true
+    enableTranslation true
+    nativeLanguage es
+    languages [es, en]
+    clientFramework react
+    withAdminUi true
+    jhipsterVersion "8.11.0"
+  }
+}
+
+entity EventoTipo {
+  nombre String required,
+  descripcion String
+}
+
+entity Integrante {
+  nombre String required,
+  apellido String required,
+  identificacion String
+}
+
+entity Evento {
+  idCatedra Long required,
+  titulo String required,
+  resumen String,
+  descripcion TextBlob,
+  fecha Instant required,
+  direccion String,
+  imagen String,
+  filaAsientos Integer,
+  columnaAsientos Integer,
+  precioEntrada BigDecimal required
+}
+
+entity Asiento {
+  fila Integer required,
+  columna Integer required,
+  estado String required,
+  persona String,
+  bloqueadoHasta Instant
+}
+
+entity Venta {
+  ventaIdCatedra Long,
+  fechaVenta Instant required,
+  resultado Boolean required,
+  descripcion String,
+  precioVenta BigDecimal required,
+  cantidadAsientos Integer
+}
+
+entity Sesion {
+  tokenJWT TextBlob required,
+  fechaInicio Instant required,
+  fechaExpiracion Instant,
+  activa Boolean required,
+  ultimoAcceso Instant
+}
+
+relationship ManyToOne {
+  Evento{tipo} to EventoTipo,
+  Integrante{evento} to Evento,
+  Asiento{evento} to Evento,
+  Venta{evento} to Evento,
+  Venta{usuario(login)} to User with builtInEntity,
+  Sesion{usuario(login)} to User with builtInEntity
+}
+
+relationship OneToMany {
+  Evento{integrante} to Integrante{evento},
+  Evento{asiento} to Asiento{evento},
+  Evento{venta} to Venta{evento},
+  Venta{asiento} to Asiento{venta}
+}
+
+paginate all with pagination
+service all with serviceClass
+dto all with mapstruct
