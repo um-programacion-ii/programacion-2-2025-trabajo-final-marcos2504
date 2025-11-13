@@ -17,6 +17,7 @@ application {
     withAdminUi true
     jhipsterVersion "8.11.0"
   }
+  entities *
 }
 
 entity EventoTipo {
@@ -70,9 +71,6 @@ entity Sesion {
 
 relationship ManyToOne {
   Evento{tipo} to EventoTipo,
-  Integrante{evento} to Evento,
-  Asiento{evento} to Evento,
-  Venta{evento} to Evento,
   Venta{usuario(login)} to User with builtInEntity,
   Sesion{usuario(login)} to User with builtInEntity
 }

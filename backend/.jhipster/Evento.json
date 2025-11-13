@@ -1,0 +1,86 @@
+{
+  "annotations": {
+    "changelogDate": "20251113195319"
+  },
+  "applications": ["eventosApp"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "idCatedra",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "titulo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "resumen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "fecha",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "direccion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "filaAsientos",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "columnaAsientos",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "precioEntrada",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Evento",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "integrante",
+      "otherEntityRelationshipName": "evento",
+      "relationshipName": "integrante",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "asiento",
+      "otherEntityRelationshipName": "evento",
+      "relationshipName": "asiento",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "evento",
+      "relationshipName": "venta",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "eventoTipo",
+      "relationshipName": "tipo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20251113195419"
+  },
+  "applications": ["eventosApp"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "fila",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "columna",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "persona",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bloqueadoHasta",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Asiento",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "evento",
+      "otherEntityRelationshipName": "asiento",
+      "relationshipName": "evento",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "asiento",
+      "relationshipName": "venta",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

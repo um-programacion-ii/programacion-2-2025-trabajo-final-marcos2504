@@ -50,6 +50,16 @@ public class CacheConfiguration {
             createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.User.class.getName());
             createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Authority.class.getName());
             createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.User.class.getName() + ".authorities");
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.EventoTipo.class.getName());
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Integrante.class.getName());
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Evento.class.getName());
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Evento.class.getName() + ".integrantes");
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Evento.class.getName() + ".asientos");
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Evento.class.getName() + ".ventas");
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Asiento.class.getName());
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Venta.class.getName());
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Venta.class.getName() + ".asientos");
+            createCache(cm, ar.edu.um.programacion2.marcosibarra.domain.Sesion.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

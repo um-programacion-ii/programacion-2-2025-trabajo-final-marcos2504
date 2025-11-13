@@ -1,0 +1,11 @@
+id;token_jwt;fecha_inicio;fecha_expiracion;activa;ultimo_acceso
+1;../fake-data/blob/hipster.txt;2025-11-12T20:20:36;2025-11-13T15:18:29;false;2025-11-13T18:02:29
+2;../fake-data/blob/hipster.txt;2025-11-13T16:52:58;2025-11-13T03:27:24;true;2025-11-13T13:57:16
+3;../fake-data/blob/hipster.txt;2025-11-13T10:56:42;2025-11-13T05:31:04;false;2025-11-12T20:58:40
+4;../fake-data/blob/hipster.txt;2025-11-13T01:44:40;2025-11-13T09:55:50;true;2025-11-13T18:34:06
+5;../fake-data/blob/hipster.txt;2025-11-12T21:00:01;2025-11-12T22:35:56;true;2025-11-13T04:41:43
+6;../fake-data/blob/hipster.txt;2025-11-13T06:04:06;2025-11-13T09:48:51;true;2025-11-13T01:04:51
+7;../fake-data/blob/hipster.txt;2025-11-13T09:05:07;2025-11-13T04:39:46;false;2025-11-13T07:40:28
+8;../fake-data/blob/hipster.txt;2025-11-13T06:53:47;2025-11-13T05:03:35;true;2025-11-12T22:39:11
+9;../fake-data/blob/hipster.txt;2025-11-13T01:04:25;2025-11-13T03:42:44;false;2025-11-12T21:15:49
+10;../fake-data/blob/hipster.txt;2025-11-13T10:55:03;2025-11-12T22:30:40;false;2025-11-13T14:36:22

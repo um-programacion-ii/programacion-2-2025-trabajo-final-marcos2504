@@ -1,0 +1,27 @@
+{
+  "eventosApp": {
+    "integrante": {
+      "home": {
+        "title": "Integrantes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Integrante",
+        "createOrEditLabel": "Create or edit a Integrante",
+        "notFound": "No Integrantes found"
+      },
+      "created": "A new Integrante is created with identifier {{ param }}",
+      "updated": "A Integrante is updated with identifier {{ param }}",
+      "deleted": "A Integrante is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Integrante {{ id }}?"
+      },
+      "detail": {
+        "title": "Integrante"
+      },
+      "id": "ID",
+      "nombre": "Nombre",
+      "apellido": "Apellido",
+      "identificacion": "Identificacion",
+      "evento": "Evento"
+    }
+  }
+}

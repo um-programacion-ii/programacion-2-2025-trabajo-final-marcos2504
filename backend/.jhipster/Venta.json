@@ -1,0 +1,64 @@
+{
+  "annotations": {
+    "changelogDate": "20251113195519"
+  },
+  "applications": ["eventosApp"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "ventaIdCatedra",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fechaVenta",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "resultado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "precioVenta",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "cantidadAsientos",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Venta",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "asiento",
+      "otherEntityRelationshipName": "venta",
+      "relationshipName": "asiento",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "usuario",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "otherEntityName": "evento",
+      "otherEntityRelationshipName": "venta",
+      "relationshipName": "evento",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

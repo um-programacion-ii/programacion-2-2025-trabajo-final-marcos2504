@@ -1,0 +1,29 @@
+{
+  "eventosApp": {
+    "sesion": {
+      "home": {
+        "title": "Sesions",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Sesion",
+        "createOrEditLabel": "Crear o editar Sesion",
+        "notFound": "Ningún Sesions encontrado"
+      },
+      "created": "Un nuevo Sesion ha sido creado con el identificador {{ param }}",
+      "updated": "Un Sesion ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Sesion ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Sesion {{ id }}?"
+      },
+      "detail": {
+        "title": "Sesion"
+      },
+      "id": "ID",
+      "tokenJWT": "Token JWT",
+      "fechaInicio": "Fecha Inicio",
+      "fechaExpiracion": "Fecha Expiracion",
+      "activa": "Activa",
+      "ultimoAcceso": "Ultimo Acceso",
+      "usuario": "Usuario"
+    }
+  }
+}

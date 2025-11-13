@@ -1,0 +1,132 @@
+package ar.edu.um.programacion2.marcosibarra.service.dto;
+
+import jakarta.validation.constraints.*;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.Objects;
+
+/**
+ * A DTO for the {@link ar.edu.um.programacion2.marcosibarra.domain.Asiento} entity.
+ */
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class AsientoDTO implements Serializable {
+
+    private Long id;
+
+    @NotNull
+    private Integer fila;
+
+    @NotNull
+    private Integer columna;
+
+    @NotNull
+    private String estado;
+
+    private String persona;
+
+    private Instant bloqueadoHasta;
+
+    private EventoDTO evento;
+
+    private VentaDTO venta;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getFila() {
+        return fila;
+    }
+
+    public void setFila(Integer fila) {
+        this.fila = fila;
+    }
+
+    public Integer getColumna() {
+        return columna;
+    }
+
+    public void setColumna(Integer columna) {
+        this.columna = columna;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getPersona() {
+        return persona;
+    }
+
+    public void setPersona(String persona) {
+        this.persona = persona;
+    }
+
+    public Instant getBloqueadoHasta() {
+        return bloqueadoHasta;
+    }
+
+    public void setBloqueadoHasta(Instant bloqueadoHasta) {
+        this.bloqueadoHasta = bloqueadoHasta;
+    }
+
+    public EventoDTO getEvento() {
+        return evento;
+    }
+
+    public void setEvento(EventoDTO evento) {
+        this.evento = evento;
+    }
+
+    public VentaDTO getVenta() {
+        return venta;
+    }
+
+    public void setVenta(VentaDTO venta) {
+        this.venta = venta;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AsientoDTO)) {
+            return false;
+        }
+
+        AsientoDTO asientoDTO = (AsientoDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, asientoDTO.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id);
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "AsientoDTO{" +
+            "id=" + getId() +
+            ", fila=" + getFila() +
+            ", columna=" + getColumna() +
+            ", estado='" + getEstado() + "'" +
+            ", persona='" + getPersona() + "'" +
+            ", bloqueadoHasta='" + getBloqueadoHasta() + "'" +
+            ", evento=" + getEvento() +
+            ", venta=" + getVenta() +
+            "}";
+    }
+}
