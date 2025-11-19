@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+catedra:
+  base-url: "http://192.168.194.250:8080/api/endpoints/v1"
+  token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MyNTA0IiwiZXhwIjoxNzYzNTk0MTI4LCJhdXRoIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzYzNTA3NzI4fQ.OTusuL59OLo0yYTL64ZC_bJsc8cKUd3-SNvDeG7eO0HmB9C4QfB5OHlVupm6tmyEZR62yc5WS260wfJzWhP-ow"
+
+spring:
+  data:
+    redis:
+      host: 192.168.194.250
+      port: 6379
+
+  kafka:
+    bootstrap-servers: 192.168.194.250:9092
