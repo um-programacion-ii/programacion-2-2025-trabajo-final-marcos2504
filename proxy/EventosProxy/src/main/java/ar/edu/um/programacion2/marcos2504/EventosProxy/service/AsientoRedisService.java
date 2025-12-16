@@ -11,10 +11,6 @@ public class AsientoRedisService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    public Object obtenerEstadoAsiento(Long eventoId, int fila, int columna) {
-        String key = "evento:" + eventoId + ":asiento:" + fila + "-" + columna;
-        return redisTemplate.opsForValue().get(key);
-    }
 
     public Object obtenerClave(String key) {
         return redisTemplate.opsForValue().get(key);

@@ -13,14 +13,6 @@ public class AsientoProxyController {
         this.redisService = redisService;
     }
 
-    @GetMapping("/{eventoId}/{fila}/{columna}")
-    public Object obtenerEstado(
-            @PathVariable Long eventoId,
-            @PathVariable int fila,
-            @PathVariable int columna) {
-
-        return redisService.obtenerEstadoAsiento(eventoId, fila, columna);
-    }
 
     @GetMapping("/clave/{key}")
     public Object obtenerClave(@PathVariable String key) {
