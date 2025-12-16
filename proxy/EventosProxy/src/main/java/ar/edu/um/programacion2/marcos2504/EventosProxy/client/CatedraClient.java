@@ -1,9 +1,7 @@
 package ar.edu.um.programacion2.marcos2504.EventosProxy.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,29 @@ public interface CatedraClient {
 
     @GetMapping("/evento/{id}")
     Object getEvento(
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String auth
+    );
+
+    @PostMapping("/bloquear-asientos")
+    Object bloquearAsientos(
+            @RequestBody Object request,
+            @RequestHeader("Authorization") String auth
+    );
+
+    @PostMapping("/realizar-venta")
+    Object realizarVenta(
+            @RequestBody Object request,
+            @RequestHeader("Authorization") String auth
+    );
+
+    @GetMapping("/listar-ventas")
+    List<Object> listarVentas(
+            @RequestHeader("Authorization") String auth
+    );
+
+    @GetMapping("/listar-venta/{id}")
+    Object listarVenta(
             @PathVariable Long id,
             @RequestHeader("Authorization") String auth
     );

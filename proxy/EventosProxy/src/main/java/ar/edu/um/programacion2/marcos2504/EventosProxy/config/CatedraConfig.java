@@ -9,5 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class CatedraConfig {
     private String baseUrl;
+    private String authUrl;
     private String token;
+    private String username;
+    private String password;
 }
