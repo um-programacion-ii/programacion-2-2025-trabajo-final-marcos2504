@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { getEntities as getEventos } from 'app/entities/evento/evento.reducer';
+import { EstadoVenta } from 'app/shared/model/enumerations/estado-venta.model';
 import { createEntity, getEntity, reset, updateEntity } from './venta.reducer';
 
 export const VentaUpdate = () => {
@@ -25,6 +26,7 @@ export const VentaUpdate = () => {
   const loading = useAppSelector(state => state.venta.loading);
   const updating = useAppSelector(state => state.venta.updating);
   const updateSuccess = useAppSelector(state => state.venta.updateSuccess);
+  const estadoVentaValues = Object.keys(EstadoVenta);
 
   const handleClose = () => {
     navigate(`/venta${location.search}`);
@@ -82,6 +84,7 @@ export const VentaUpdate = () => {
           fechaVenta: displayDefaultDateTime(),
         }
       : {
+          estadoVenta: 'PENDIENTE',
           ...ventaEntity,
           fechaVenta: convertDateTimeFromServer(ventaEntity.fechaVenta),
           usuario: ventaEntity?.usuario?.id,
@@ -164,6 +167,19 @@ export const VentaUpdate = () => {
                 data-cy="cantidadAsientos"
                 type="text"
               />
+              <ValidatedField
+                label={translate('eventosApp.venta.estadoVenta')}
+                id="venta-estadoVenta"
+                name="estadoVenta"
+                data-cy="estadoVenta"
+                type="select"
+              >
+                {estadoVentaValues.map(estadoVenta => (
+                  <option value={estadoVenta} key={estadoVenta}>
+                    {translate(`eventosApp.EstadoVenta.${estadoVenta}`)}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 id="venta-usuario"
                 name="usuario"

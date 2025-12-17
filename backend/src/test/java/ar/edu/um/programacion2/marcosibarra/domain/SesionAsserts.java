@@ -51,7 +51,14 @@ public class SesionAsserts {
             .satisfies(a -> assertThat(a.getFechaInicio()).as("check fechaInicio").isEqualTo(expected.getFechaInicio()))
             .satisfies(a -> assertThat(a.getFechaExpiracion()).as("check fechaExpiracion").isEqualTo(expected.getFechaExpiracion()))
             .satisfies(a -> assertThat(a.getActiva()).as("check activa").isEqualTo(expected.getActiva()))
-            .satisfies(a -> assertThat(a.getUltimoAcceso()).as("check ultimoAcceso").isEqualTo(expected.getUltimoAcceso()));
+            .satisfies(a -> assertThat(a.getUltimoAcceso()).as("check ultimoAcceso").isEqualTo(expected.getUltimoAcceso()))
+            .satisfies(a -> assertThat(a.getEventoSeleccionado()).as("check eventoSeleccionado").isEqualTo(expected.getEventoSeleccionado())
+            )
+            .satisfies(a -> assertThat(a.getEstadoSesion()).as("check estadoSesion").isEqualTo(expected.getEstadoSesion()))
+            .satisfies(a ->
+                assertThat(a.getAsientosSeleccionados()).as("check asientosSeleccionados").isEqualTo(expected.getAsientosSeleccionados())
+            )
+            .satisfies(a -> assertThat(a.getCantidadAsientos()).as("check cantidadAsientos").isEqualTo(expected.getCantidadAsientos()));
     }
 
     /**

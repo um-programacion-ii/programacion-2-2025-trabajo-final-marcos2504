@@ -1,11 +1,11 @@
-id;fila;columna;estado;persona;bloqueado_hasta
-1;23268;14666;drag;midst;2025-11-13T11:01:18
-2;10614;10603;till alert;mmm;2025-11-13T04:29:29
-3;21768;6227;good-natured thin;ha;2025-11-13T06:15:06
-4;6133;29993;enhance failing youthfully;while;2025-11-13T06:19:10
-5;5277;22304;emergent;drat;2025-11-13T15:58:01
-6;12939;16766;fat;webbed leading pacemaker;2025-11-13T10:36:28
-7;8651;2621;boohoo;whether slowly;2025-11-13T19:24:39
-8;3306;10467;outflank;brood stabilise;2025-11-13T16:01:40
-9;10867;29686;octave properly cuckoo;daily pave sinful;2025-11-12T22:10:40
-10;11731;6059;similar oof;outstanding hmph except;2025-11-13T07:25:29
+id;fila;columna;estado_asiento;persona;bloqueado_hasta
+1;23268;14666;LIBRE;awkwardly;2025-11-12T23:11:29
+2;24330;5831;OCUPADO;quantify hm;2025-11-12T22:56:03
+3;21310;12241;OCUPADO;vacantly;2025-11-13T14:55:09
+4;23695;11723;YA_BLOQUEADO;terraform;2025-11-13T03:46:12
+5;30826;16771;NO_VALIDO;mechanically er;2025-11-13T16:43:53
+6;6934;29704;YA_BLOQUEADO;mmm digital yet;2025-11-13T15:20:51
+7;8804;30857;NO_VALIDO;the habit;2025-11-13T04:22:39
+8;25634;15050;BLOQUEADO;pharmacopoeia french extremely;2025-11-13T17:18:51
+9;4611;8347;BLOQUEADO;notwithstanding along;2025-11-13T16:53:43
+10;20438;5865;OCUPADO;yum;2025-11-13T13:25:55

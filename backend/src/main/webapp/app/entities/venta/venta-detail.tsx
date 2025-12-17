@@ -69,6 +69,12 @@ export const VentaDetail = () => {
           </dt>
           <dd>{ventaEntity.cantidadAsientos}</dd>
           <dt>
+            <span id="estadoVenta">
+              <Translate contentKey="eventosApp.venta.estadoVenta">Estado Venta</Translate>
+            </span>
+          </dt>
+          <dd>{ventaEntity.estadoVenta}</dd>
+          <dt>
             <Translate contentKey="eventosApp.venta.usuario">Usuario</Translate>
           </dt>
           <dd>{ventaEntity.usuario ? ventaEntity.usuario.login : ''}</dd>

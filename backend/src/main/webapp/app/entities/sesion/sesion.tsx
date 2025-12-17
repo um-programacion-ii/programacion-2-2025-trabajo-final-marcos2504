@@ -133,6 +133,22 @@ export const Sesion = () => {
                   <Translate contentKey="eventosApp.sesion.ultimoAcceso">Ultimo Acceso</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('ultimoAcceso')} />
                 </th>
+                <th className="hand" onClick={sort('eventoSeleccionado')}>
+                  <Translate contentKey="eventosApp.sesion.eventoSeleccionado">Evento Seleccionado</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('eventoSeleccionado')} />
+                </th>
+                <th className="hand" onClick={sort('estadoSesion')}>
+                  <Translate contentKey="eventosApp.sesion.estadoSesion">Estado Sesion</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('estadoSesion')} />
+                </th>
+                <th className="hand" onClick={sort('asientosSeleccionados')}>
+                  <Translate contentKey="eventosApp.sesion.asientosSeleccionados">Asientos Seleccionados</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('asientosSeleccionados')} />
+                </th>
+                <th className="hand" onClick={sort('cantidadAsientos')}>
+                  <Translate contentKey="eventosApp.sesion.cantidadAsientos">Cantidad Asientos</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cantidadAsientos')} />
+                </th>
                 <th>
                   <Translate contentKey="eventosApp.sesion.usuario">Usuario</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -154,6 +170,12 @@ export const Sesion = () => {
                   </td>
                   <td>{sesion.activa ? 'true' : 'false'}</td>
                   <td>{sesion.ultimoAcceso ? <TextFormat type="date" value={sesion.ultimoAcceso} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{sesion.eventoSeleccionado}</td>
+                  <td>
+                    <Translate contentKey={`eventosApp.EstadoSesion.${sesion.estadoSesion}`} />
+                  </td>
+                  <td>{sesion.asientosSeleccionados}</td>
+                  <td>{sesion.cantidadAsientos}</td>
                   <td>{sesion.usuario ? sesion.usuario.login : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

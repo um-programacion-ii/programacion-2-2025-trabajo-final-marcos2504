@@ -1,5 +1,6 @@
 package ar.edu.um.programacion2.marcosibarra.domain;
 
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoAsiento;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -33,8 +34,9 @@ public class Asiento implements Serializable {
     private Integer columna;
 
     @NotNull
-    @Column(name = "estado", nullable = false)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_asiento", nullable = false)
+    private EstadoAsiento estadoAsiento;
 
     @Column(name = "persona")
     private String persona;
@@ -91,17 +93,17 @@ public class Asiento implements Serializable {
         this.columna = columna;
     }
 
-    public String getEstado() {
-        return this.estado;
+    public EstadoAsiento getEstadoAsiento() {
+        return this.estadoAsiento;
     }
 
-    public Asiento estado(String estado) {
-        this.setEstado(estado);
+    public Asiento estadoAsiento(EstadoAsiento estadoAsiento) {
+        this.setEstadoAsiento(estadoAsiento);
         return this;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoAsiento(EstadoAsiento estadoAsiento) {
+        this.estadoAsiento = estadoAsiento;
     }
 
     public String getPersona() {
@@ -182,7 +184,7 @@ public class Asiento implements Serializable {
             "id=" + getId() +
             ", fila=" + getFila() +
             ", columna=" + getColumna() +
-            ", estado='" + getEstado() + "'" +
+            ", estadoAsiento='" + getEstadoAsiento() + "'" +
             ", persona='" + getPersona() + "'" +
             ", bloqueadoHasta='" + getBloqueadoHasta() + "'" +
             "}";

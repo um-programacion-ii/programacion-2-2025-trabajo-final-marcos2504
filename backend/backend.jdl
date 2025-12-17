@@ -47,9 +47,17 @@ entity Evento {
 entity Asiento {
   fila Integer required,
   columna Integer required,
-  estado String required,
+  estadoAsiento EstadoAsiento required,
   persona String,
   bloqueadoHasta Instant
+}
+
+enum EstadoAsiento {
+  LIBRE,
+  OCUPADO,
+  BLOQUEADO,
+  YA_BLOQUEADO,
+  NO_VALIDO
 }
 
 entity Venta {
@@ -58,7 +66,15 @@ entity Venta {
   resultado Boolean required,
   descripcion String,
   precioVenta BigDecimal required,
-  cantidadAsientos Integer
+  cantidadAsientos Integer,
+  estadoVenta EstadoVenta
+}
+
+enum EstadoVenta {
+  PENDIENTE,
+  CONFIRMADA,
+  RECHAZADA,
+  ERROR_SINCRONIZACION
 }
 
 entity Sesion {
@@ -66,7 +82,20 @@ entity Sesion {
   fechaInicio Instant required,
   fechaExpiracion Instant,
   activa Boolean required,
-  ultimoAcceso Instant
+  ultimoAcceso Instant,
+  eventoSeleccionado Long,
+  estadoSesion EstadoSesion,
+  asientosSeleccionados TextBlob,
+  cantidadAsientos Integer
+}
+
+enum EstadoSesion {
+  LISTA_EVENTOS,
+  EVENTO_SELECCIONADO,
+  ASIENTOS_BLOQUEADOS,
+  DATOS_COMPLETOS,
+  VENTA_CONFIRMADA,
+  EXPIRADA
 }
 
 relationship ManyToOne {

@@ -8,6 +8,7 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { EstadoSesion } from 'app/shared/model/enumerations/estado-sesion.model';
 import { createEntity, getEntity, reset, updateEntity } from './sesion.reducer';
 
 export const SesionUpdate = () => {
@@ -23,6 +24,7 @@ export const SesionUpdate = () => {
   const loading = useAppSelector(state => state.sesion.loading);
   const updating = useAppSelector(state => state.sesion.updating);
   const updateSuccess = useAppSelector(state => state.sesion.updateSuccess);
+  const estadoSesionValues = Object.keys(EstadoSesion);
 
   const handleClose = () => {
     navigate(`/sesion${location.search}`);
@@ -51,6 +53,12 @@ export const SesionUpdate = () => {
     values.fechaInicio = convertDateTimeToServer(values.fechaInicio);
     values.fechaExpiracion = convertDateTimeToServer(values.fechaExpiracion);
     values.ultimoAcceso = convertDateTimeToServer(values.ultimoAcceso);
+    if (values.eventoSeleccionado !== undefined && typeof values.eventoSeleccionado !== 'number') {
+      values.eventoSeleccionado = Number(values.eventoSeleccionado);
+    }
+    if (values.cantidadAsientos !== undefined && typeof values.cantidadAsientos !== 'number') {
+      values.cantidadAsientos = Number(values.cantidadAsientos);
+    }
 
     const entity = {
       ...sesionEntity,
@@ -73,6 +81,7 @@ export const SesionUpdate = () => {
           ultimoAcceso: displayDefaultDateTime(),
         }
       : {
+          estadoSesion: 'LISTA_EVENTOS',
           ...sesionEntity,
           fechaInicio: convertDateTimeFromServer(sesionEntity.fechaInicio),
           fechaExpiracion: convertDateTimeFromServer(sesionEntity.fechaExpiracion),
@@ -149,6 +158,40 @@ export const SesionUpdate = () => {
                 data-cy="ultimoAcceso"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
+              />
+              <ValidatedField
+                label={translate('eventosApp.sesion.eventoSeleccionado')}
+                id="sesion-eventoSeleccionado"
+                name="eventoSeleccionado"
+                data-cy="eventoSeleccionado"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('eventosApp.sesion.estadoSesion')}
+                id="sesion-estadoSesion"
+                name="estadoSesion"
+                data-cy="estadoSesion"
+                type="select"
+              >
+                {estadoSesionValues.map(estadoSesion => (
+                  <option value={estadoSesion} key={estadoSesion}>
+                    {translate(`eventosApp.EstadoSesion.${estadoSesion}`)}
+                  </option>
+                ))}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('eventosApp.sesion.asientosSeleccionados')}
+                id="sesion-asientosSeleccionados"
+                name="asientosSeleccionados"
+                data-cy="asientosSeleccionados"
+                type="textarea"
+              />
+              <ValidatedField
+                label={translate('eventosApp.sesion.cantidadAsientos')}
+                id="sesion-cantidadAsientos"
+                name="cantidadAsientos"
+                data-cy="cantidadAsientos"
+                type="text"
               />
               <ValidatedField
                 id="sesion-usuario"

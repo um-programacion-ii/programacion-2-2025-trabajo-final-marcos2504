@@ -1,5 +1,6 @@
 package ar.edu.um.programacion2.marcosibarra.domain;
 
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoVenta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -47,6 +48,10 @@ public class Venta implements Serializable {
 
     @Column(name = "cantidad_asientos")
     private Integer cantidadAsientos;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_venta")
+    private EstadoVenta estadoVenta;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "venta")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -153,6 +158,19 @@ public class Venta implements Serializable {
         this.cantidadAsientos = cantidadAsientos;
     }
 
+    public EstadoVenta getEstadoVenta() {
+        return this.estadoVenta;
+    }
+
+    public Venta estadoVenta(EstadoVenta estadoVenta) {
+        this.setEstadoVenta(estadoVenta);
+        return this;
+    }
+
+    public void setEstadoVenta(EstadoVenta estadoVenta) {
+        this.estadoVenta = estadoVenta;
+    }
+
     public Set<Asiento> getAsientos() {
         return this.asientos;
     }
@@ -240,6 +258,7 @@ public class Venta implements Serializable {
             ", descripcion='" + getDescripcion() + "'" +
             ", precioVenta=" + getPrecioVenta() +
             ", cantidadAsientos=" + getCantidadAsientos() +
+            ", estadoVenta='" + getEstadoVenta() + "'" +
             "}";
     }
 }

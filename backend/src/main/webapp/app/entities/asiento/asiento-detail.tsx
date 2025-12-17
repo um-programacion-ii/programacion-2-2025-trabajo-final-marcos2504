@@ -45,11 +45,11 @@ export const AsientoDetail = () => {
           </dt>
           <dd>{asientoEntity.columna}</dd>
           <dt>
-            <span id="estado">
-              <Translate contentKey="eventosApp.asiento.estado">Estado</Translate>
+            <span id="estadoAsiento">
+              <Translate contentKey="eventosApp.asiento.estadoAsiento">Estado Asiento</Translate>
             </span>
           </dt>
-          <dd>{asientoEntity.estado}</dd>
+          <dd>{asientoEntity.estadoAsiento}</dd>
           <dt>
             <span id="persona">
               <Translate contentKey="eventosApp.asiento.persona">Persona</Translate>

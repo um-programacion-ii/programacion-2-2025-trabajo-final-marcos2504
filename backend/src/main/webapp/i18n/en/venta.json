@@ -24,6 +24,7 @@
       "descripcion": "Descripcion",
       "precioVenta": "Precio Venta",
       "cantidadAsientos": "Cantidad Asientos",
+      "estadoVenta": "Estado Venta",
       "asiento": "Asiento",
       "usuario": "Usuario",
       "evento": "Evento"

@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import ar.edu.um.programacion2.marcosibarra.IntegrationTest;
 import ar.edu.um.programacion2.marcosibarra.domain.Sesion;
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoSesion;
 import ar.edu.um.programacion2.marcosibarra.repository.SesionRepository;
 import ar.edu.um.programacion2.marcosibarra.repository.UserRepository;
 import ar.edu.um.programacion2.marcosibarra.service.SesionService;
@@ -61,6 +62,18 @@ class SesionResourceIT {
     private static final Instant DEFAULT_ULTIMO_ACCESO = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ULTIMO_ACCESO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Long DEFAULT_EVENTO_SELECCIONADO = 1L;
+    private static final Long UPDATED_EVENTO_SELECCIONADO = 2L;
+
+    private static final EstadoSesion DEFAULT_ESTADO_SESION = EstadoSesion.LISTA_EVENTOS;
+    private static final EstadoSesion UPDATED_ESTADO_SESION = EstadoSesion.EVENTO_SELECCIONADO;
+
+    private static final String DEFAULT_ASIENTOS_SELECCIONADOS = "AAAAAAAAAA";
+    private static final String UPDATED_ASIENTOS_SELECCIONADOS = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_CANTIDAD_ASIENTOS = 1;
+    private static final Integer UPDATED_CANTIDAD_ASIENTOS = 2;
+
     private static final String ENTITY_API_URL = "/api/sesions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -107,7 +120,11 @@ class SesionResourceIT {
             .fechaInicio(DEFAULT_FECHA_INICIO)
             .fechaExpiracion(DEFAULT_FECHA_EXPIRACION)
             .activa(DEFAULT_ACTIVA)
-            .ultimoAcceso(DEFAULT_ULTIMO_ACCESO);
+            .ultimoAcceso(DEFAULT_ULTIMO_ACCESO)
+            .eventoSeleccionado(DEFAULT_EVENTO_SELECCIONADO)
+            .estadoSesion(DEFAULT_ESTADO_SESION)
+            .asientosSeleccionados(DEFAULT_ASIENTOS_SELECCIONADOS)
+            .cantidadAsientos(DEFAULT_CANTIDAD_ASIENTOS);
     }
 
     /**
@@ -122,7 +139,11 @@ class SesionResourceIT {
             .fechaInicio(UPDATED_FECHA_INICIO)
             .fechaExpiracion(UPDATED_FECHA_EXPIRACION)
             .activa(UPDATED_ACTIVA)
-            .ultimoAcceso(UPDATED_ULTIMO_ACCESO);
+            .ultimoAcceso(UPDATED_ULTIMO_ACCESO)
+            .eventoSeleccionado(UPDATED_EVENTO_SELECCIONADO)
+            .estadoSesion(UPDATED_ESTADO_SESION)
+            .asientosSeleccionados(UPDATED_ASIENTOS_SELECCIONADOS)
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
     }
 
     @BeforeEach
@@ -230,7 +251,11 @@ class SesionResourceIT {
             .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
             .andExpect(jsonPath("$.[*].fechaExpiracion").value(hasItem(DEFAULT_FECHA_EXPIRACION.toString())))
             .andExpect(jsonPath("$.[*].activa").value(hasItem(DEFAULT_ACTIVA)))
-            .andExpect(jsonPath("$.[*].ultimoAcceso").value(hasItem(DEFAULT_ULTIMO_ACCESO.toString())));
+            .andExpect(jsonPath("$.[*].ultimoAcceso").value(hasItem(DEFAULT_ULTIMO_ACCESO.toString())))
+            .andExpect(jsonPath("$.[*].eventoSeleccionado").value(hasItem(DEFAULT_EVENTO_SELECCIONADO.intValue())))
+            .andExpect(jsonPath("$.[*].estadoSesion").value(hasItem(DEFAULT_ESTADO_SESION.toString())))
+            .andExpect(jsonPath("$.[*].asientosSeleccionados").value(hasItem(DEFAULT_ASIENTOS_SELECCIONADOS)))
+            .andExpect(jsonPath("$.[*].cantidadAsientos").value(hasItem(DEFAULT_CANTIDAD_ASIENTOS)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -266,7 +291,11 @@ class SesionResourceIT {
             .andExpect(jsonPath("$.fechaInicio").value(DEFAULT_FECHA_INICIO.toString()))
             .andExpect(jsonPath("$.fechaExpiracion").value(DEFAULT_FECHA_EXPIRACION.toString()))
             .andExpect(jsonPath("$.activa").value(DEFAULT_ACTIVA))
-            .andExpect(jsonPath("$.ultimoAcceso").value(DEFAULT_ULTIMO_ACCESO.toString()));
+            .andExpect(jsonPath("$.ultimoAcceso").value(DEFAULT_ULTIMO_ACCESO.toString()))
+            .andExpect(jsonPath("$.eventoSeleccionado").value(DEFAULT_EVENTO_SELECCIONADO.intValue()))
+            .andExpect(jsonPath("$.estadoSesion").value(DEFAULT_ESTADO_SESION.toString()))
+            .andExpect(jsonPath("$.asientosSeleccionados").value(DEFAULT_ASIENTOS_SELECCIONADOS))
+            .andExpect(jsonPath("$.cantidadAsientos").value(DEFAULT_CANTIDAD_ASIENTOS));
     }
 
     @Test
@@ -293,7 +322,11 @@ class SesionResourceIT {
             .fechaInicio(UPDATED_FECHA_INICIO)
             .fechaExpiracion(UPDATED_FECHA_EXPIRACION)
             .activa(UPDATED_ACTIVA)
-            .ultimoAcceso(UPDATED_ULTIMO_ACCESO);
+            .ultimoAcceso(UPDATED_ULTIMO_ACCESO)
+            .eventoSeleccionado(UPDATED_EVENTO_SELECCIONADO)
+            .estadoSesion(UPDATED_ESTADO_SESION)
+            .asientosSeleccionados(UPDATED_ASIENTOS_SELECCIONADOS)
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
         SesionDTO sesionDTO = sesionMapper.toDto(updatedSesion);
 
         restSesionMockMvc
@@ -379,7 +412,12 @@ class SesionResourceIT {
         Sesion partialUpdatedSesion = new Sesion();
         partialUpdatedSesion.setId(sesion.getId());
 
-        partialUpdatedSesion.tokenJWT(UPDATED_TOKEN_JWT).fechaInicio(UPDATED_FECHA_INICIO).fechaExpiracion(UPDATED_FECHA_EXPIRACION);
+        partialUpdatedSesion
+            .tokenJWT(UPDATED_TOKEN_JWT)
+            .fechaInicio(UPDATED_FECHA_INICIO)
+            .fechaExpiracion(UPDATED_FECHA_EXPIRACION)
+            .estadoSesion(UPDATED_ESTADO_SESION)
+            .asientosSeleccionados(UPDATED_ASIENTOS_SELECCIONADOS);
 
         restSesionMockMvc
             .perform(
@@ -412,7 +450,11 @@ class SesionResourceIT {
             .fechaInicio(UPDATED_FECHA_INICIO)
             .fechaExpiracion(UPDATED_FECHA_EXPIRACION)
             .activa(UPDATED_ACTIVA)
-            .ultimoAcceso(UPDATED_ULTIMO_ACCESO);
+            .ultimoAcceso(UPDATED_ULTIMO_ACCESO)
+            .eventoSeleccionado(UPDATED_EVENTO_SELECCIONADO)
+            .estadoSesion(UPDATED_ESTADO_SESION)
+            .asientosSeleccionados(UPDATED_ASIENTOS_SELECCIONADOS)
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
 
         restSesionMockMvc
             .perform(

@@ -1,5 +1,6 @@
 package ar.edu.um.programacion2.marcosibarra.service.dto;
 
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoVenta;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,6 +29,8 @@ public class VentaDTO implements Serializable {
     private BigDecimal precioVenta;
 
     private Integer cantidadAsientos;
+
+    private EstadoVenta estadoVenta;
 
     private UserDTO usuario;
 
@@ -89,6 +92,14 @@ public class VentaDTO implements Serializable {
         this.cantidadAsientos = cantidadAsientos;
     }
 
+    public EstadoVenta getEstadoVenta() {
+        return estadoVenta;
+    }
+
+    public void setEstadoVenta(EstadoVenta estadoVenta) {
+        this.estadoVenta = estadoVenta;
+    }
+
     public UserDTO getUsuario() {
         return usuario;
     }
@@ -137,6 +148,7 @@ public class VentaDTO implements Serializable {
             ", descripcion='" + getDescripcion() + "'" +
             ", precioVenta=" + getPrecioVenta() +
             ", cantidadAsientos=" + getCantidadAsientos() +
+            ", estadoVenta='" + getEstadoVenta() + "'" +
             ", usuario=" + getUsuario() +
             ", evento=" + getEvento() +
             "}";

@@ -23,6 +23,10 @@
       "fechaExpiracion": "Fecha Expiracion",
       "activa": "Activa",
       "ultimoAcceso": "Ultimo Acceso",
+      "eventoSeleccionado": "Evento Seleccionado",
+      "estadoSesion": "Estado Sesion",
+      "asientosSeleccionados": "Asientos Seleccionados",
+      "cantidadAsientos": "Cantidad Asientos",
       "usuario": "Usuario"
     }
   }

@@ -1,0 +1,11 @@
+{
+  "eventosApp": {
+    "EstadoVenta": {
+      "null": "",
+      "PENDIENTE": "PENDIENTE",
+      "CONFIRMADA": "CONFIRMADA",
+      "RECHAZADA": "RECHAZADA",
+      "ERROR_SINCRONIZACION": "ERROR_SINCRONIZACION"
+    }
+  }
+}

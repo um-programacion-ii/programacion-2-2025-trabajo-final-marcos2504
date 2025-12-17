@@ -137,6 +137,10 @@ export const Venta = () => {
                   <Translate contentKey="eventosApp.venta.cantidadAsientos">Cantidad Asientos</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('cantidadAsientos')} />
                 </th>
+                <th className="hand" onClick={sort('estadoVenta')}>
+                  <Translate contentKey="eventosApp.venta.estadoVenta">Estado Venta</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('estadoVenta')} />
+                </th>
                 <th>
                   <Translate contentKey="eventosApp.venta.usuario">Usuario</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -160,6 +164,9 @@ export const Venta = () => {
                   <td>{venta.descripcion}</td>
                   <td>{venta.precioVenta}</td>
                   <td>{venta.cantidadAsientos}</td>
+                  <td>
+                    <Translate contentKey={`eventosApp.EstadoVenta.${venta.estadoVenta}`} />
+                  </td>
                   <td>{venta.usuario ? venta.usuario.login : ''}</td>
                   <td>{venta.evento ? <Link to={`/evento/${venta.evento.id}`}>{venta.evento.id}</Link> : ''}</td>
                   <td className="text-end">

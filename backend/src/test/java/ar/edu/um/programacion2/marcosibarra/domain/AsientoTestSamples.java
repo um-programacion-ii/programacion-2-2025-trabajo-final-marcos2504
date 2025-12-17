@@ -12,11 +12,11 @@ public class AsientoTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static Asiento getAsientoSample1() {
-        return new Asiento().id(1L).fila(1).columna(1).estado("estado1").persona("persona1");
+        return new Asiento().id(1L).fila(1).columna(1).persona("persona1");
     }
 
     public static Asiento getAsientoSample2() {
-        return new Asiento().id(2L).fila(2).columna(2).estado("estado2").persona("persona2");
+        return new Asiento().id(2L).fila(2).columna(2).persona("persona2");
     }
 
     public static Asiento getAsientoRandomSampleGenerator() {
@@ -24,7 +24,6 @@ public class AsientoTestSamples {
             .id(longCount.incrementAndGet())
             .fila(intCount.incrementAndGet())
             .columna(intCount.incrementAndGet())
-            .estado(UUID.randomUUID().toString())
             .persona(UUID.randomUUID().toString());
     }
 }

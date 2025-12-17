@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntities as getEventos } from 'app/entities/evento/evento.reducer';
 import { getEntities as getVentas } from 'app/entities/venta/venta.reducer';
+import { EstadoAsiento } from 'app/shared/model/enumerations/estado-asiento.model';
 import { createEntity, getEntity, reset, updateEntity } from './asiento.reducer';
 
 export const AsientoUpdate = () => {
@@ -25,6 +26,7 @@ export const AsientoUpdate = () => {
   const loading = useAppSelector(state => state.asiento.loading);
   const updating = useAppSelector(state => state.asiento.updating);
   const updateSuccess = useAppSelector(state => state.asiento.updateSuccess);
+  const estadoAsientoValues = Object.keys(EstadoAsiento);
 
   const handleClose = () => {
     navigate(`/asiento${location.search}`);
@@ -79,6 +81,7 @@ export const AsientoUpdate = () => {
           bloqueadoHasta: displayDefaultDateTime(),
         }
       : {
+          estadoAsiento: 'LIBRE',
           ...asientoEntity,
           bloqueadoHasta: convertDateTimeFromServer(asientoEntity.bloqueadoHasta),
           evento: asientoEntity?.evento?.id,
@@ -133,15 +136,18 @@ export const AsientoUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('eventosApp.asiento.estado')}
-                id="asiento-estado"
-                name="estado"
-                data-cy="estado"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
-              />
+                label={translate('eventosApp.asiento.estadoAsiento')}
+                id="asiento-estadoAsiento"
+                name="estadoAsiento"
+                data-cy="estadoAsiento"
+                type="select"
+              >
+                {estadoAsientoValues.map(estadoAsiento => (
+                  <option value={estadoAsiento} key={estadoAsiento}>
+                    {translate(`eventosApp.EstadoAsiento.${estadoAsiento}`)}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 label={translate('eventosApp.asiento.persona')}
                 id="asiento-persona"

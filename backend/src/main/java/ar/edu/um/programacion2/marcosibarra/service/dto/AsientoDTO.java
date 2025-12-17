@@ -1,5 +1,6 @@
 package ar.edu.um.programacion2.marcosibarra.service.dto;
 
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoAsiento;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,7 +21,7 @@ public class AsientoDTO implements Serializable {
     private Integer columna;
 
     @NotNull
-    private String estado;
+    private EstadoAsiento estadoAsiento;
 
     private String persona;
 
@@ -54,12 +55,12 @@ public class AsientoDTO implements Serializable {
         this.columna = columna;
     }
 
-    public String getEstado() {
-        return estado;
+    public EstadoAsiento getEstadoAsiento() {
+        return estadoAsiento;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoAsiento(EstadoAsiento estadoAsiento) {
+        this.estadoAsiento = estadoAsiento;
     }
 
     public String getPersona() {
@@ -122,7 +123,7 @@ public class AsientoDTO implements Serializable {
             "id=" + getId() +
             ", fila=" + getFila() +
             ", columna=" + getColumna() +
-            ", estado='" + getEstado() + "'" +
+            ", estadoAsiento='" + getEstadoAsiento() + "'" +
             ", persona='" + getPersona() + "'" +
             ", bloqueadoHasta='" + getBloqueadoHasta() + "'" +
             ", evento=" + getEvento() +

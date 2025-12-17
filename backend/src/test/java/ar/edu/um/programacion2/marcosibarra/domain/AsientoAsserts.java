@@ -49,7 +49,7 @@ public class AsientoAsserts {
             .as("Verify Asiento relevant properties")
             .satisfies(a -> assertThat(a.getFila()).as("check fila").isEqualTo(expected.getFila()))
             .satisfies(a -> assertThat(a.getColumna()).as("check columna").isEqualTo(expected.getColumna()))
-            .satisfies(a -> assertThat(a.getEstado()).as("check estado").isEqualTo(expected.getEstado()))
+            .satisfies(a -> assertThat(a.getEstadoAsiento()).as("check estadoAsiento").isEqualTo(expected.getEstadoAsiento()))
             .satisfies(a -> assertThat(a.getPersona()).as("check persona").isEqualTo(expected.getPersona()))
             .satisfies(a -> assertThat(a.getBloqueadoHasta()).as("check bloqueadoHasta").isEqualTo(expected.getBloqueadoHasta()));
     }

@@ -1,5 +1,6 @@
 package ar.edu.um.programacion2.marcosibarra.domain;
 
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoSesion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -40,6 +41,20 @@ public class Sesion implements Serializable {
 
     @Column(name = "ultimo_acceso")
     private Instant ultimoAcceso;
+
+    @Column(name = "evento_seleccionado")
+    private Long eventoSeleccionado;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_sesion")
+    private EstadoSesion estadoSesion;
+
+    @Lob
+    @Column(name = "asientos_seleccionados")
+    private String asientosSeleccionados;
+
+    @Column(name = "cantidad_asientos")
+    private Integer cantidadAsientos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User usuario;
@@ -124,6 +139,58 @@ public class Sesion implements Serializable {
         this.ultimoAcceso = ultimoAcceso;
     }
 
+    public Long getEventoSeleccionado() {
+        return this.eventoSeleccionado;
+    }
+
+    public Sesion eventoSeleccionado(Long eventoSeleccionado) {
+        this.setEventoSeleccionado(eventoSeleccionado);
+        return this;
+    }
+
+    public void setEventoSeleccionado(Long eventoSeleccionado) {
+        this.eventoSeleccionado = eventoSeleccionado;
+    }
+
+    public EstadoSesion getEstadoSesion() {
+        return this.estadoSesion;
+    }
+
+    public Sesion estadoSesion(EstadoSesion estadoSesion) {
+        this.setEstadoSesion(estadoSesion);
+        return this;
+    }
+
+    public void setEstadoSesion(EstadoSesion estadoSesion) {
+        this.estadoSesion = estadoSesion;
+    }
+
+    public String getAsientosSeleccionados() {
+        return this.asientosSeleccionados;
+    }
+
+    public Sesion asientosSeleccionados(String asientosSeleccionados) {
+        this.setAsientosSeleccionados(asientosSeleccionados);
+        return this;
+    }
+
+    public void setAsientosSeleccionados(String asientosSeleccionados) {
+        this.asientosSeleccionados = asientosSeleccionados;
+    }
+
+    public Integer getCantidadAsientos() {
+        return this.cantidadAsientos;
+    }
+
+    public Sesion cantidadAsientos(Integer cantidadAsientos) {
+        this.setCantidadAsientos(cantidadAsientos);
+        return this;
+    }
+
+    public void setCantidadAsientos(Integer cantidadAsientos) {
+        this.cantidadAsientos = cantidadAsientos;
+    }
+
     public User getUsuario() {
         return this.usuario;
     }
@@ -166,6 +233,10 @@ public class Sesion implements Serializable {
             ", fechaExpiracion='" + getFechaExpiracion() + "'" +
             ", activa='" + getActiva() + "'" +
             ", ultimoAcceso='" + getUltimoAcceso() + "'" +
+            ", eventoSeleccionado=" + getEventoSeleccionado() +
+            ", estadoSesion='" + getEstadoSesion() + "'" +
+            ", asientosSeleccionados='" + getAsientosSeleccionados() + "'" +
+            ", cantidadAsientos=" + getCantidadAsientos() +
             "}";
     }
 }

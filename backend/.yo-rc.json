@@ -6,6 +6,7 @@
     "buildTool": "maven",
     "cacheProvider": "ehcache",
     "clientFramework": "react",
+    "creationTimestamp": 1765914890939,
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "enableHibernateCache": true,

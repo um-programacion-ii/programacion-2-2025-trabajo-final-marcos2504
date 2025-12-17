@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import ar.edu.um.programacion2.marcosibarra.IntegrationTest;
 import ar.edu.um.programacion2.marcosibarra.domain.Venta;
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoVenta;
 import ar.edu.um.programacion2.marcosibarra.repository.UserRepository;
 import ar.edu.um.programacion2.marcosibarra.repository.VentaRepository;
 import ar.edu.um.programacion2.marcosibarra.service.VentaService;
@@ -66,6 +67,9 @@ class VentaResourceIT {
     private static final Integer DEFAULT_CANTIDAD_ASIENTOS = 1;
     private static final Integer UPDATED_CANTIDAD_ASIENTOS = 2;
 
+    private static final EstadoVenta DEFAULT_ESTADO_VENTA = EstadoVenta.PENDIENTE;
+    private static final EstadoVenta UPDATED_ESTADO_VENTA = EstadoVenta.CONFIRMADA;
+
     private static final String ENTITY_API_URL = "/api/ventas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -113,7 +117,8 @@ class VentaResourceIT {
             .resultado(DEFAULT_RESULTADO)
             .descripcion(DEFAULT_DESCRIPCION)
             .precioVenta(DEFAULT_PRECIO_VENTA)
-            .cantidadAsientos(DEFAULT_CANTIDAD_ASIENTOS);
+            .cantidadAsientos(DEFAULT_CANTIDAD_ASIENTOS)
+            .estadoVenta(DEFAULT_ESTADO_VENTA);
     }
 
     /**
@@ -129,7 +134,8 @@ class VentaResourceIT {
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)
             .precioVenta(UPDATED_PRECIO_VENTA)
-            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS)
+            .estadoVenta(UPDATED_ESTADO_VENTA);
     }
 
     @BeforeEach
@@ -255,7 +261,8 @@ class VentaResourceIT {
             .andExpect(jsonPath("$.[*].resultado").value(hasItem(DEFAULT_RESULTADO)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
             .andExpect(jsonPath("$.[*].precioVenta").value(hasItem(sameNumber(DEFAULT_PRECIO_VENTA))))
-            .andExpect(jsonPath("$.[*].cantidadAsientos").value(hasItem(DEFAULT_CANTIDAD_ASIENTOS)));
+            .andExpect(jsonPath("$.[*].cantidadAsientos").value(hasItem(DEFAULT_CANTIDAD_ASIENTOS)))
+            .andExpect(jsonPath("$.[*].estadoVenta").value(hasItem(DEFAULT_ESTADO_VENTA.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -292,7 +299,8 @@ class VentaResourceIT {
             .andExpect(jsonPath("$.resultado").value(DEFAULT_RESULTADO))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
             .andExpect(jsonPath("$.precioVenta").value(sameNumber(DEFAULT_PRECIO_VENTA)))
-            .andExpect(jsonPath("$.cantidadAsientos").value(DEFAULT_CANTIDAD_ASIENTOS));
+            .andExpect(jsonPath("$.cantidadAsientos").value(DEFAULT_CANTIDAD_ASIENTOS))
+            .andExpect(jsonPath("$.estadoVenta").value(DEFAULT_ESTADO_VENTA.toString()));
     }
 
     @Test
@@ -320,7 +328,8 @@ class VentaResourceIT {
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)
             .precioVenta(UPDATED_PRECIO_VENTA)
-            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS)
+            .estadoVenta(UPDATED_ESTADO_VENTA);
         VentaDTO ventaDTO = ventaMapper.toDto(updatedVenta);
 
         restVentaMockMvc
@@ -445,7 +454,8 @@ class VentaResourceIT {
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)
             .precioVenta(UPDATED_PRECIO_VENTA)
-            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS)
+            .estadoVenta(UPDATED_ESTADO_VENTA);
 
         restVentaMockMvc
             .perform(

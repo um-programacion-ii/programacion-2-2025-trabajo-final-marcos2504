@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import ar.edu.um.programacion2.marcosibarra.IntegrationTest;
 import ar.edu.um.programacion2.marcosibarra.domain.Asiento;
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoAsiento;
 import ar.edu.um.programacion2.marcosibarra.repository.AsientoRepository;
 import ar.edu.um.programacion2.marcosibarra.service.dto.AsientoDTO;
 import ar.edu.um.programacion2.marcosibarra.service.mapper.AsientoMapper;
@@ -42,8 +43,8 @@ class AsientoResourceIT {
     private static final Integer DEFAULT_COLUMNA = 1;
     private static final Integer UPDATED_COLUMNA = 2;
 
-    private static final String DEFAULT_ESTADO = "AAAAAAAAAA";
-    private static final String UPDATED_ESTADO = "BBBBBBBBBB";
+    private static final EstadoAsiento DEFAULT_ESTADO_ASIENTO = EstadoAsiento.LIBRE;
+    private static final EstadoAsiento UPDATED_ESTADO_ASIENTO = EstadoAsiento.OCUPADO;
 
     private static final String DEFAULT_PERSONA = "AAAAAAAAAA";
     private static final String UPDATED_PERSONA = "BBBBBBBBBB";
@@ -86,7 +87,7 @@ class AsientoResourceIT {
         return new Asiento()
             .fila(DEFAULT_FILA)
             .columna(DEFAULT_COLUMNA)
-            .estado(DEFAULT_ESTADO)
+            .estadoAsiento(DEFAULT_ESTADO_ASIENTO)
             .persona(DEFAULT_PERSONA)
             .bloqueadoHasta(DEFAULT_BLOQUEADO_HASTA);
     }
@@ -101,7 +102,7 @@ class AsientoResourceIT {
         return new Asiento()
             .fila(UPDATED_FILA)
             .columna(UPDATED_COLUMNA)
-            .estado(UPDATED_ESTADO)
+            .estadoAsiento(UPDATED_ESTADO_ASIENTO)
             .persona(UPDATED_PERSONA)
             .bloqueadoHasta(UPDATED_BLOQUEADO_HASTA);
     }
@@ -197,10 +198,10 @@ class AsientoResourceIT {
 
     @Test
     @Transactional
-    void checkEstadoIsRequired() throws Exception {
+    void checkEstadoAsientoIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
-        asiento.setEstado(null);
+        asiento.setEstadoAsiento(null);
 
         // Create the Asiento, which fails.
         AsientoDTO asientoDTO = asientoMapper.toDto(asiento);
@@ -226,7 +227,7 @@ class AsientoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(asiento.getId().intValue())))
             .andExpect(jsonPath("$.[*].fila").value(hasItem(DEFAULT_FILA)))
             .andExpect(jsonPath("$.[*].columna").value(hasItem(DEFAULT_COLUMNA)))
-            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO)))
+            .andExpect(jsonPath("$.[*].estadoAsiento").value(hasItem(DEFAULT_ESTADO_ASIENTO.toString())))
             .andExpect(jsonPath("$.[*].persona").value(hasItem(DEFAULT_PERSONA)))
             .andExpect(jsonPath("$.[*].bloqueadoHasta").value(hasItem(DEFAULT_BLOQUEADO_HASTA.toString())));
     }
@@ -245,7 +246,7 @@ class AsientoResourceIT {
             .andExpect(jsonPath("$.id").value(asiento.getId().intValue()))
             .andExpect(jsonPath("$.fila").value(DEFAULT_FILA))
             .andExpect(jsonPath("$.columna").value(DEFAULT_COLUMNA))
-            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO))
+            .andExpect(jsonPath("$.estadoAsiento").value(DEFAULT_ESTADO_ASIENTO.toString()))
             .andExpect(jsonPath("$.persona").value(DEFAULT_PERSONA))
             .andExpect(jsonPath("$.bloqueadoHasta").value(DEFAULT_BLOQUEADO_HASTA.toString()));
     }
@@ -272,7 +273,7 @@ class AsientoResourceIT {
         updatedAsiento
             .fila(UPDATED_FILA)
             .columna(UPDATED_COLUMNA)
-            .estado(UPDATED_ESTADO)
+            .estadoAsiento(UPDATED_ESTADO_ASIENTO)
             .persona(UPDATED_PERSONA)
             .bloqueadoHasta(UPDATED_BLOQUEADO_HASTA);
         AsientoDTO asientoDTO = asientoMapper.toDto(updatedAsiento);
@@ -360,7 +361,7 @@ class AsientoResourceIT {
         Asiento partialUpdatedAsiento = new Asiento();
         partialUpdatedAsiento.setId(asiento.getId());
 
-        partialUpdatedAsiento.fila(UPDATED_FILA).estado(UPDATED_ESTADO).persona(UPDATED_PERSONA);
+        partialUpdatedAsiento.fila(UPDATED_FILA).estadoAsiento(UPDATED_ESTADO_ASIENTO).persona(UPDATED_PERSONA);
 
         restAsientoMockMvc
             .perform(
@@ -391,7 +392,7 @@ class AsientoResourceIT {
         partialUpdatedAsiento
             .fila(UPDATED_FILA)
             .columna(UPDATED_COLUMNA)
-            .estado(UPDATED_ESTADO)
+            .estadoAsiento(UPDATED_ESTADO_ASIENTO)
             .persona(UPDATED_PERSONA)
             .bloqueadoHasta(UPDATED_BLOQUEADO_HASTA);
 

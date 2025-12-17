@@ -120,9 +120,9 @@ export const Asiento = () => {
                   <Translate contentKey="eventosApp.asiento.columna">Columna</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('columna')} />
                 </th>
-                <th className="hand" onClick={sort('estado')}>
-                  <Translate contentKey="eventosApp.asiento.estado">Estado</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('estado')} />
+                <th className="hand" onClick={sort('estadoAsiento')}>
+                  <Translate contentKey="eventosApp.asiento.estadoAsiento">Estado Asiento</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('estadoAsiento')} />
                 </th>
                 <th className="hand" onClick={sort('persona')}>
                   <Translate contentKey="eventosApp.asiento.persona">Persona</Translate>{' '}
@@ -151,7 +151,9 @@ export const Asiento = () => {
                   </td>
                   <td>{asiento.fila}</td>
                   <td>{asiento.columna}</td>
-                  <td>{asiento.estado}</td>
+                  <td>
+                    <Translate contentKey={`eventosApp.EstadoAsiento.${asiento.estadoAsiento}`} />
+                  </td>
                   <td>{asiento.persona}</td>
                   <td>
                     {asiento.bloqueadoHasta ? <TextFormat type="date" value={asiento.bloqueadoHasta} format={APP_DATE_FORMAT} /> : null}

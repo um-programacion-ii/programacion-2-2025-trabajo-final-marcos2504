@@ -20,7 +20,7 @@
             <column name="columna" type="integer">
                 <constraints nullable="false" />
             </column>
-            <column name="estado" type="varchar(255)">
+            <column name="estado_asiento" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="persona" type="varchar(255)">
@@ -59,7 +59,7 @@
             <column name="id" type="numeric"/>
             <column name="fila" type="numeric"/>
             <column name="columna" type="numeric"/>
-            <column name="estado" type="string"/>
+            <column name="estado_asiento" type="string"/>
             <column name="persona" type="string"/>
             <column name="bloqueado_hasta" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

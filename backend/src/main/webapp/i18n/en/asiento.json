@@ -20,7 +20,7 @@
       "id": "ID",
       "fila": "Fila",
       "columna": "Columna",
-      "estado": "Estado",
+      "estadoAsiento": "Estado Asiento",
       "persona": "Persona",
       "bloqueadoHasta": "Bloqueado Hasta",
       "evento": "Evento",

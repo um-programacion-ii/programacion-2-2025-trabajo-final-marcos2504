@@ -1,5 +1,6 @@
 package ar.edu.um.programacion2.marcosibarra.service.dto;
 
+import ar.edu.um.programacion2.marcosibarra.domain.enumeration.EstadoSesion;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -26,6 +27,15 @@ public class SesionDTO implements Serializable {
     private Boolean activa;
 
     private Instant ultimoAcceso;
+
+    private Long eventoSeleccionado;
+
+    private EstadoSesion estadoSesion;
+
+    @Lob
+    private String asientosSeleccionados;
+
+    private Integer cantidadAsientos;
 
     private UserDTO usuario;
 
@@ -77,6 +87,38 @@ public class SesionDTO implements Serializable {
         this.ultimoAcceso = ultimoAcceso;
     }
 
+    public Long getEventoSeleccionado() {
+        return eventoSeleccionado;
+    }
+
+    public void setEventoSeleccionado(Long eventoSeleccionado) {
+        this.eventoSeleccionado = eventoSeleccionado;
+    }
+
+    public EstadoSesion getEstadoSesion() {
+        return estadoSesion;
+    }
+
+    public void setEstadoSesion(EstadoSesion estadoSesion) {
+        this.estadoSesion = estadoSesion;
+    }
+
+    public String getAsientosSeleccionados() {
+        return asientosSeleccionados;
+    }
+
+    public void setAsientosSeleccionados(String asientosSeleccionados) {
+        this.asientosSeleccionados = asientosSeleccionados;
+    }
+
+    public Integer getCantidadAsientos() {
+        return cantidadAsientos;
+    }
+
+    public void setCantidadAsientos(Integer cantidadAsientos) {
+        this.cantidadAsientos = cantidadAsientos;
+    }
+
     public UserDTO getUsuario() {
         return usuario;
     }
@@ -116,6 +158,10 @@ public class SesionDTO implements Serializable {
             ", fechaExpiracion='" + getFechaExpiracion() + "'" +
             ", activa='" + getActiva() + "'" +
             ", ultimoAcceso='" + getUltimoAcceso() + "'" +
+            ", eventoSeleccionado=" + getEventoSeleccionado() +
+            ", estadoSesion='" + getEstadoSesion() + "'" +
+            ", asientosSeleccionados='" + getAsientosSeleccionados() + "'" +
+            ", cantidadAsientos=" + getCantidadAsientos() +
             ", usuario=" + getUsuario() +
             "}";
     }

@@ -67,6 +67,30 @@ export const SesionDetail = () => {
             {sesionEntity.ultimoAcceso ? <TextFormat value={sesionEntity.ultimoAcceso} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
           <dt>
+            <span id="eventoSeleccionado">
+              <Translate contentKey="eventosApp.sesion.eventoSeleccionado">Evento Seleccionado</Translate>
+            </span>
+          </dt>
+          <dd>{sesionEntity.eventoSeleccionado}</dd>
+          <dt>
+            <span id="estadoSesion">
+              <Translate contentKey="eventosApp.sesion.estadoSesion">Estado Sesion</Translate>
+            </span>
+          </dt>
+          <dd>{sesionEntity.estadoSesion}</dd>
+          <dt>
+            <span id="asientosSeleccionados">
+              <Translate contentKey="eventosApp.sesion.asientosSeleccionados">Asientos Seleccionados</Translate>
+            </span>
+          </dt>
+          <dd>{sesionEntity.asientosSeleccionados}</dd>
+          <dt>
+            <span id="cantidadAsientos">
+              <Translate contentKey="eventosApp.sesion.cantidadAsientos">Cantidad Asientos</Translate>
+            </span>
+          </dt>
+          <dd>{sesionEntity.cantidadAsientos}</dd>
+          <dt>
             <Translate contentKey="eventosApp.sesion.usuario">Usuario</Translate>
           </dt>
           <dd>{sesionEntity.usuario ? sesionEntity.usuario.login : ''}</dd>

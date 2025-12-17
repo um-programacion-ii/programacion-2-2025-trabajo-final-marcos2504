@@ -16,9 +16,10 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "estado",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldName": "estadoAsiento",
+      "fieldType": "EstadoAsiento",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LIBRE,OCUPADO,BLOQUEADO,YA_BLOQUEADO,NO_VALIDO"
     },
     {
       "fieldName": "persona",

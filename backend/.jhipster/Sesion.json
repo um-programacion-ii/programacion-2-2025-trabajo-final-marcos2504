@@ -27,6 +27,23 @@
     {
       "fieldName": "ultimoAcceso",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "eventoSeleccionado",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estadoSesion",
+      "fieldType": "EstadoSesion",
+      "fieldValues": "LISTA_EVENTOS,EVENTO_SELECCIONADO,ASIENTOS_BLOQUEADOS,DATOS_COMPLETOS,VENTA_CONFIRMADA,EXPIRADA"
+    },
+    {
+      "fieldName": "asientosSeleccionados",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "cantidadAsientos",
+      "fieldType": "Integer"
     }
   ],
   "name": "Sesion",

@@ -58,7 +58,8 @@ public class VentaAsserts {
                     .usingComparator(bigDecimalCompareTo)
                     .isEqualTo(expected.getPrecioVenta())
             )
-            .satisfies(a -> assertThat(a.getCantidadAsientos()).as("check cantidadAsientos").isEqualTo(expected.getCantidadAsientos()));
+            .satisfies(a -> assertThat(a.getCantidadAsientos()).as("check cantidadAsientos").isEqualTo(expected.getCantidadAsientos()))
+            .satisfies(a -> assertThat(a.getEstadoVenta()).as("check estadoVenta").isEqualTo(expected.getEstadoVenta()));
     }
 
     /**
