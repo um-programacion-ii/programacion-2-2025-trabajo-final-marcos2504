@@ -1,0 +1,18 @@
+server:
+  port: 8081
+
+catedra:
+  base-url: "http://192.168.194.250:8080/api/endpoints/v1"
+  auth-url: "http://192.168.194.250:8080/api"
+  token: ""
+  username: "marcos2504"
+  password: "123456"
+
+spring:
+  data:
+    redis:
+      host: 192.168.194.250
+      port: 6379
+
+  kafka:
+    bootstrap-servers: 192.168.194.250:9092
