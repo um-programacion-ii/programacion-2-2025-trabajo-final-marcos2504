@@ -32,13 +32,13 @@ entity Integrante {
 }
 
 entity Evento {
-  idCatedra Long required,
+  idCatedra Long,
   titulo String required,
   resumen String,
   descripcion TextBlob,
   fecha Instant required,
   direccion String,
-  imagen String,
+  imagen TextBlob,
   filaAsientos Integer,
   columnaAsientos Integer,
   precioEntrada BigDecimal required
@@ -114,3 +114,4 @@ relationship OneToMany {
 paginate all with pagination
 service all with serviceClass
 dto all with mapstruct
+

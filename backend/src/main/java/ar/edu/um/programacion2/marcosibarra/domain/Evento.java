@@ -27,8 +27,7 @@ public class Evento implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Column(name = "id_catedra", nullable = false)
+    @Column(name = "id_catedra")
     private Long idCatedra;
 
     @NotNull
@@ -49,6 +48,7 @@ public class Evento implements Serializable {
     @Column(name = "direccion")
     private String direccion;
 
+    @Lob
     @Column(name = "imagen")
     private String imagen;
 

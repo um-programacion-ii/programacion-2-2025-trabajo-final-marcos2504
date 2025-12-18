@@ -12,6 +12,5 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Long> {
-
     Optional<Evento> findByIdCatedra(Long idCatedra);
 }

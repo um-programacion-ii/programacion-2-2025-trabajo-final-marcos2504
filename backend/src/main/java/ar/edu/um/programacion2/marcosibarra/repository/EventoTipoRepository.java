@@ -10,11 +10,7 @@ import java.util.Optional;
  * Spring Data JPA repository for the EventoTipo entity.
  */
 @SuppressWarnings("unused")
-
 @Repository
 public interface EventoTipoRepository extends JpaRepository<EventoTipo, Long> {
     Optional<EventoTipo> findByNombre(String nombre);
 }
-
-
-

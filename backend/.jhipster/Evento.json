@@ -7,8 +7,7 @@
   "fields": [
     {
       "fieldName": "idCatedra",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Long"
     },
     {
       "fieldName": "titulo",
@@ -34,7 +33,7 @@
     },
     {
       "fieldName": "imagen",
-      "fieldType": "String"
+      "fieldType": "TextBlob"
     },
     {
       "fieldName": "filaAsientos",

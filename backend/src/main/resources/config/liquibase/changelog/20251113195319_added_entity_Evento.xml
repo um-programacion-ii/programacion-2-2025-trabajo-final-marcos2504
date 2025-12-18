@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="id_catedra" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="titulo" type="varchar(255)">
                 <constraints nullable="false" />
@@ -32,7 +32,7 @@
             <column name="direccion" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="imagen" type="varchar(255)">
+            <column name="imagen" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="fila_asientos" type="integer">
@@ -75,7 +75,7 @@
             <column name="descripcion" type="clob"/>
             <column name="fecha" type="date"/>
             <column name="direccion" type="string"/>
-            <column name="imagen" type="string"/>
+            <column name="imagen" type="clob"/>
             <column name="fila_asientos" type="numeric"/>
             <column name="columna_asientos" type="numeric"/>
             <column name="precio_entrada" type="numeric"/>

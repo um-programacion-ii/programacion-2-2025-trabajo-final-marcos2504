@@ -190,23 +190,6 @@ class EventoResourceIT {
 
     @Test
     @Transactional
-    void checkIdCatedraIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        evento.setIdCatedra(null);
-
-        // Create the Evento, which fails.
-        EventoDTO eventoDTO = eventoMapper.toDto(evento);
-
-        restEventoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(eventoDTO)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void checkTituloIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null

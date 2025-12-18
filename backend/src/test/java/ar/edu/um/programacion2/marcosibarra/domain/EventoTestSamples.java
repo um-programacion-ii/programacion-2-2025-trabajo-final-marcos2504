@@ -18,7 +18,6 @@ public class EventoTestSamples {
             .titulo("titulo1")
             .resumen("resumen1")
             .direccion("direccion1")
-            .imagen("imagen1")
             .filaAsientos(1)
             .columnaAsientos(1);
     }
@@ -30,7 +29,6 @@ public class EventoTestSamples {
             .titulo("titulo2")
             .resumen("resumen2")
             .direccion("direccion2")
-            .imagen("imagen2")
             .filaAsientos(2)
             .columnaAsientos(2);
     }
@@ -42,7 +40,6 @@ public class EventoTestSamples {
             .titulo(UUID.randomUUID().toString())
             .resumen(UUID.randomUUID().toString())
             .direccion(UUID.randomUUID().toString())
-            .imagen(UUID.randomUUID().toString())
             .filaAsientos(intCount.incrementAndGet())
             .columnaAsientos(intCount.incrementAndGet());
     }

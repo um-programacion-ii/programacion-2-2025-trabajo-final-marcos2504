@@ -15,7 +15,6 @@ public class EventoDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private Long idCatedra;
 
     @NotNull
@@ -31,6 +30,7 @@ public class EventoDTO implements Serializable {
 
     private String direccion;
 
+    @Lob
     private String imagen;
 
     private Integer filaAsientos;

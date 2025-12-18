@@ -104,9 +104,6 @@ jhipster:
       host: localhost
       port: 5000
       ring-buffer-size: 512
-
-  proxy:
-    base-url: http://localhost:8081/proxy
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
@@ -117,3 +114,5 @@ jhipster:
 # ===================================================================
 
 # application:
+proxy:
+  base-url: http://localhost:8081/proxy

@@ -117,10 +117,6 @@ export const EventoUpdate = () => {
                 name="idCatedra"
                 data-cy="idCatedra"
                 type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
               />
               <ValidatedField
                 label={translate('eventosApp.evento.titulo')}
@@ -164,7 +160,13 @@ export const EventoUpdate = () => {
                 data-cy="direccion"
                 type="text"
               />
-              <ValidatedField label={translate('eventosApp.evento.imagen')} id="evento-imagen" name="imagen" data-cy="imagen" type="text" />
+              <ValidatedField
+                label={translate('eventosApp.evento.imagen')}
+                id="evento-imagen"
+                name="imagen"
+                data-cy="imagen"
+                type="textarea"
+              />
               <ValidatedField
                 label={translate('eventosApp.evento.filaAsientos')}
                 id="evento-filaAsientos"
