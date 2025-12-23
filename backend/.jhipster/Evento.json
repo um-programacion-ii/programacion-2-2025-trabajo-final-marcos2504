@@ -6,10 +6,6 @@
   "dto": "mapstruct",
   "fields": [
     {
-      "fieldName": "idCatedra",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "titulo",
       "fieldType": "String",
       "fieldValidateRules": ["required"]

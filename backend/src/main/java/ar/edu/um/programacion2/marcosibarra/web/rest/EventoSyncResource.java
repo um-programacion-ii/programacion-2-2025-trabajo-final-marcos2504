@@ -100,3 +100,4 @@ public class EventoSyncResource {
         return ResponseEntity.ok(response);
     }
 }
+

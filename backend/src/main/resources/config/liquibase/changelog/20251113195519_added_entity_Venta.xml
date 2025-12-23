@@ -14,9 +14,6 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="venta_id_catedra" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="fecha_venta" type="${datetimeType}">
                 <constraints nullable="false" />
             </column>
@@ -63,7 +60,6 @@
                   tableName="venta"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="venta_id_catedra" type="numeric"/>
             <column name="fecha_venta" type="date"/>
             <column name="resultado" type="boolean"/>
             <column name="descripcion" type="string"/>

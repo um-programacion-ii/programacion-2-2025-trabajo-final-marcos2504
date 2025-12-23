@@ -48,7 +48,6 @@ public class EventoAsserts {
     public static void assertEventoUpdatableFieldsEquals(Evento expected, Evento actual) {
         assertThat(actual)
             .as("Verify Evento relevant properties")
-            .satisfies(a -> assertThat(a.getIdCatedra()).as("check idCatedra").isEqualTo(expected.getIdCatedra()))
             .satisfies(a -> assertThat(a.getTitulo()).as("check titulo").isEqualTo(expected.getTitulo()))
             .satisfies(a -> assertThat(a.getResumen()).as("check resumen").isEqualTo(expected.getResumen()))
             .satisfies(a -> assertThat(a.getDescripcion()).as("check descripcion").isEqualTo(expected.getDescripcion()))

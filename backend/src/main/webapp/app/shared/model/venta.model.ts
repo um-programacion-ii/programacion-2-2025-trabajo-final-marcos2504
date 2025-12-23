@@ -5,7 +5,6 @@ import { EstadoVenta } from 'app/shared/model/enumerations/estado-venta.model';
 
 export interface IVenta {
   id?: number;
-  ventaIdCatedra?: number | null;
   fechaVenta?: dayjs.Dayjs;
   resultado?: boolean;
   descripcion?: string | null;

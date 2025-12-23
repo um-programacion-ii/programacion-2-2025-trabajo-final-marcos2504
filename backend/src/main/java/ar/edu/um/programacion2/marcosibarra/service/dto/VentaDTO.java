@@ -15,8 +15,6 @@ public class VentaDTO implements Serializable {
 
     private Long id;
 
-    private Long ventaIdCatedra;
-
     @NotNull
     private Instant fechaVenta;
 
@@ -42,14 +40,6 @@ public class VentaDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getVentaIdCatedra() {
-        return ventaIdCatedra;
-    }
-
-    public void setVentaIdCatedra(Long ventaIdCatedra) {
-        this.ventaIdCatedra = ventaIdCatedra;
     }
 
     public Instant getFechaVenta() {
@@ -142,7 +132,6 @@ public class VentaDTO implements Serializable {
     public String toString() {
         return "VentaDTO{" +
             "id=" + getId() +
-            ", ventaIdCatedra=" + getVentaIdCatedra() +
             ", fechaVenta='" + getFechaVenta() + "'" +
             ", resultado='" + getResultado() + "'" +
             ", descripcion='" + getDescripcion() + "'" +

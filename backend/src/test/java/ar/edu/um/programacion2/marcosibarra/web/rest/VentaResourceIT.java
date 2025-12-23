@@ -49,9 +49,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class VentaResourceIT {
 
-    private static final Long DEFAULT_VENTA_ID_CATEDRA = 1L;
-    private static final Long UPDATED_VENTA_ID_CATEDRA = 2L;
-
     private static final Instant DEFAULT_FECHA_VENTA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FECHA_VENTA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -112,7 +109,6 @@ class VentaResourceIT {
      */
     public static Venta createEntity() {
         return new Venta()
-            .ventaIdCatedra(DEFAULT_VENTA_ID_CATEDRA)
             .fechaVenta(DEFAULT_FECHA_VENTA)
             .resultado(DEFAULT_RESULTADO)
             .descripcion(DEFAULT_DESCRIPCION)
@@ -129,7 +125,6 @@ class VentaResourceIT {
      */
     public static Venta createUpdatedEntity() {
         return new Venta()
-            .ventaIdCatedra(UPDATED_VENTA_ID_CATEDRA)
             .fechaVenta(UPDATED_FECHA_VENTA)
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)
@@ -256,7 +251,6 @@ class VentaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(venta.getId().intValue())))
-            .andExpect(jsonPath("$.[*].ventaIdCatedra").value(hasItem(DEFAULT_VENTA_ID_CATEDRA.intValue())))
             .andExpect(jsonPath("$.[*].fechaVenta").value(hasItem(DEFAULT_FECHA_VENTA.toString())))
             .andExpect(jsonPath("$.[*].resultado").value(hasItem(DEFAULT_RESULTADO)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
@@ -294,7 +288,6 @@ class VentaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(venta.getId().intValue()))
-            .andExpect(jsonPath("$.ventaIdCatedra").value(DEFAULT_VENTA_ID_CATEDRA.intValue()))
             .andExpect(jsonPath("$.fechaVenta").value(DEFAULT_FECHA_VENTA.toString()))
             .andExpect(jsonPath("$.resultado").value(DEFAULT_RESULTADO))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
@@ -323,7 +316,6 @@ class VentaResourceIT {
         // Disconnect from session so that the updates on updatedVenta are not directly saved in db
         em.detach(updatedVenta);
         updatedVenta
-            .ventaIdCatedra(UPDATED_VENTA_ID_CATEDRA)
             .fechaVenta(UPDATED_FECHA_VENTA)
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)
@@ -416,11 +408,11 @@ class VentaResourceIT {
         partialUpdatedVenta.setId(venta.getId());
 
         partialUpdatedVenta
-            .fechaVenta(UPDATED_FECHA_VENTA)
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)
             .precioVenta(UPDATED_PRECIO_VENTA)
-            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS);
+            .cantidadAsientos(UPDATED_CANTIDAD_ASIENTOS)
+            .estadoVenta(UPDATED_ESTADO_VENTA);
 
         restVentaMockMvc
             .perform(
@@ -449,7 +441,6 @@ class VentaResourceIT {
         partialUpdatedVenta.setId(venta.getId());
 
         partialUpdatedVenta
-            .ventaIdCatedra(UPDATED_VENTA_ID_CATEDRA)
             .fechaVenta(UPDATED_FECHA_VENTA)
             .resultado(UPDATED_RESULTADO)
             .descripcion(UPDATED_DESCRIPCION)

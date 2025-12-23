@@ -17,6 +17,9 @@ import java.util.Map;
 /**
  * Servicio para sincronizar eventos desde la cátedra (vía proxy)
  * Actualiza la base de datos local con los eventos del servidor
+ *
+ * CAMBIO: Ya no guardamos idCatedra, solo recuperamos el id del proxy
+ * y lo usamos directamente como id en nuestra base de datos.
  */
 @Service
 public class EventoSyncService {
@@ -35,22 +38,6 @@ public class EventoSyncService {
         this.proxyClient = proxyClient;
         this.eventoRepository = eventoRepository;
         this.eventoTipoRepository = eventoTipoRepository;
-    }
-
-    /**
-     * Sincroniza eventos automáticamente cada 5 minutos
-     * Se ejecuta 10 segundos después de iniciar la aplicación
-     *
-     * DESACTIVADO: Se activará cuando se implemente el consumer de Kafka
-     */
-    // @Scheduled(fixedDelay = 300000, initialDelay = 10000) // 5 minutos
-    public void sincronizarEventosAutomatico() {
-        try {
-            log.info("Iniciando sincronización automática de eventos...");
-            sincronizarTodosLosEventos();
-        } catch (Exception e) {
-            log.error("Error en sincronización automática de eventos", e);
-        }
     }
 
     /**
@@ -81,38 +68,45 @@ public class EventoSyncService {
 
     /**
      * Sincroniza un evento específico desde la cátedra
+     *
+     * NUEVO ENFOQUE:
+     * 1. Obtiene el id del evento desde el proxy
+     * 2. Busca en la BD local por ese id
+     * 3. Si no existe, crea uno nuevo CON ESE ID
+     * 4. Mapea todos los datos y guarda
+     *
      * @return true si el evento es nuevo, false si ya existía
      */
     public boolean sincronizarEvento(Map<String, Object> eventoCatedra) {
-        Long idCatedra = getLongValue(eventoCatedra.get("id"));
+        Long idProxy = getLongValue(eventoCatedra.get("id"));
 
-        // 1. Buscar o crear evento (versión simplificada)
-        Evento evento = eventoRepository.findByIdCatedra(idCatedra)
+        log.debug("Sincronizando evento con id: {}", idProxy);
+
+        // Buscar evento existente por id
+        Evento evento = eventoRepository.findById(idProxy)
             .orElseGet(() -> {
+                // Crear nuevo evento con el id del proxy
                 Evento nuevo = new Evento();
-                nuevo.setIdCatedra(idCatedra);
-                log.debug("Creando nuevo evento: {}", idCatedra);
+                nuevo.setId(idProxy);
+                log.debug("Creando nuevo evento con id: {}", idProxy);
                 return nuevo;
             });
 
-        // Verificar si es nuevo ANTES de guardar
-        boolean esNuevo = evento.getId() == null;
+        // Verificar si es nuevo (antes de guardar, el nuevo no tiene id persistido aún)
+        boolean esNuevo = !eventoRepository.existsById(idProxy);
 
-        // Si ya existía, lo actualizamos
         if (!esNuevo) {
-            log.debug("Actualizando evento existente: {}", idCatedra);
+            log.debug("Actualizando evento existente: {}", idProxy);
         }
 
-        // 2. Mapear datos desde cátedra
+        // Mapear datos desde cátedra
         mapearDatosCatedra(evento, eventoCatedra);
 
-        // 3. Mapear tipo de evento (buscar o crear)
+        // Mapear tipo de evento
         mapearTipoEvento(evento, eventoCatedra);
 
-        // 4. Guardar
+        // Guardar
         eventoRepository.save(evento);
-
-        // TODO: Sincronizar integrantes si es necesario
 
         return esNuevo;
     }
@@ -170,15 +164,15 @@ public class EventoSyncService {
     }
 
     /**
-     * Sincroniza un evento específico por su ID de cátedra
+     * Sincroniza un evento específico por su ID
      */
-    public void sincronizarEventoPorId(Long idCatedra) {
+    public void sincronizarEventoPorId(Long id) {
         try {
-            log.info("Sincronizando evento específico: {}", idCatedra);
-            Map<String, Object> eventoCatedra = proxyClient.getEvento(idCatedra);
+            log.info("Sincronizando evento específico: {}", id);
+            Map<String, Object> eventoCatedra = proxyClient.getEvento(id);
             sincronizarEvento(eventoCatedra);
         } catch (Exception e) {
-            log.error("Error sincronizando evento {}", idCatedra, e);
+            log.error("Error sincronizando evento {}", id, e);
             throw e;
         }
     }

@@ -32,7 +32,6 @@ entity Integrante {
 }
 
 entity Evento {
-  idCatedra Long,
   titulo String required,
   resumen String,
   descripcion TextBlob,
@@ -61,7 +60,6 @@ enum EstadoAsiento {
 }
 
 entity Venta {
-  ventaIdCatedra Long,
   fechaVenta Instant required,
   resultado Boolean required,
   descripcion String,
@@ -114,4 +112,3 @@ relationship OneToMany {
 paginate all with pagination
 service all with serviceClass
 dto all with mapstruct
-

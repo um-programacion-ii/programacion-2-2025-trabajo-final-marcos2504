@@ -48,7 +48,6 @@ public class VentaAsserts {
     public static void assertVentaUpdatableFieldsEquals(Venta expected, Venta actual) {
         assertThat(actual)
             .as("Verify Venta relevant properties")
-            .satisfies(a -> assertThat(a.getVentaIdCatedra()).as("check ventaIdCatedra").isEqualTo(expected.getVentaIdCatedra()))
             .satisfies(a -> assertThat(a.getFechaVenta()).as("check fechaVenta").isEqualTo(expected.getFechaVenta()))
             .satisfies(a -> assertThat(a.getResultado()).as("check resultado").isEqualTo(expected.getResultado()))
             .satisfies(a -> assertThat(a.getDescripcion()).as("check descripcion").isEqualTo(expected.getDescripcion()))

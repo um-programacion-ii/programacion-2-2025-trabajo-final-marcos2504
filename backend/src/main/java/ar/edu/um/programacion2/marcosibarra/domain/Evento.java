@@ -27,9 +27,6 @@ public class Evento implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "id_catedra")
-    private Long idCatedra;
-
     @NotNull
     @Column(name = "titulo", nullable = false)
     private String titulo;
@@ -93,19 +90,6 @@ public class Evento implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdCatedra() {
-        return this.idCatedra;
-    }
-
-    public Evento idCatedra(Long idCatedra) {
-        this.setIdCatedra(idCatedra);
-        return this;
-    }
-
-    public void setIdCatedra(Long idCatedra) {
-        this.idCatedra = idCatedra;
     }
 
     public String getTitulo() {
@@ -355,7 +339,6 @@ public class Evento implements Serializable {
     public String toString() {
         return "Evento{" +
             "id=" + getId() +
-            ", idCatedra=" + getIdCatedra() +
             ", titulo='" + getTitulo() + "'" +
             ", resumen='" + getResumen() + "'" +
             ", descripcion='" + getDescripcion() + "'" +

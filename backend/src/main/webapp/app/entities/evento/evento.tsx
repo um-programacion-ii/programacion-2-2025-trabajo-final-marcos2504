@@ -113,10 +113,6 @@ export const Evento = () => {
                 <th className="hand" onClick={sort('id')}>
                   <Translate contentKey="eventosApp.evento.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('idCatedra')}>
-                  <Translate contentKey="eventosApp.evento.idCatedra">Id Catedra</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('idCatedra')} />
-                </th>
                 <th className="hand" onClick={sort('titulo')}>
                   <Translate contentKey="eventosApp.evento.titulo">Titulo</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('titulo')} />
@@ -167,7 +163,6 @@ export const Evento = () => {
                       {evento.id}
                     </Button>
                   </td>
-                  <td>{evento.idCatedra}</td>
                   <td>{evento.titulo}</td>
                   <td>{evento.resumen}</td>
                   <td>{evento.descripcion}</td>

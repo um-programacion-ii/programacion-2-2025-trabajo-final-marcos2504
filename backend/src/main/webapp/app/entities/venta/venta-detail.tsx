@@ -33,12 +33,6 @@ export const VentaDetail = () => {
           </dt>
           <dd>{ventaEntity.id}</dd>
           <dt>
-            <span id="ventaIdCatedra">
-              <Translate contentKey="eventosApp.venta.ventaIdCatedra">Venta Id Catedra</Translate>
-            </span>
-          </dt>
-          <dd>{ventaEntity.ventaIdCatedra}</dd>
-          <dt>
             <span id="fechaVenta">
               <Translate contentKey="eventosApp.venta.fechaVenta">Fecha Venta</Translate>
             </span>

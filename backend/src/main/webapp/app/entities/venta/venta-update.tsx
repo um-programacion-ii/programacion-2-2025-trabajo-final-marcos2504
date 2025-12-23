@@ -53,9 +53,6 @@ export const VentaUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    if (values.ventaIdCatedra !== undefined && typeof values.ventaIdCatedra !== 'number') {
-      values.ventaIdCatedra = Number(values.ventaIdCatedra);
-    }
     values.fechaVenta = convertDateTimeToServer(values.fechaVenta);
     if (values.precioVenta !== undefined && typeof values.precioVenta !== 'number') {
       values.precioVenta = Number(values.precioVenta);
@@ -116,13 +113,6 @@ export const VentaUpdate = () => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField
-                label={translate('eventosApp.venta.ventaIdCatedra')}
-                id="venta-ventaIdCatedra"
-                name="ventaIdCatedra"
-                data-cy="ventaIdCatedra"
-                type="text"
-              />
               <ValidatedField
                 label={translate('eventosApp.venta.fechaVenta')}
                 id="venta-fechaVenta"

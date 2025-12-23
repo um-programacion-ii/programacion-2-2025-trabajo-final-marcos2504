@@ -12,17 +12,16 @@ public class VentaTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static Venta getVentaSample1() {
-        return new Venta().id(1L).ventaIdCatedra(1L).descripcion("descripcion1").cantidadAsientos(1);
+        return new Venta().id(1L).descripcion("descripcion1").cantidadAsientos(1);
     }
 
     public static Venta getVentaSample2() {
-        return new Venta().id(2L).ventaIdCatedra(2L).descripcion("descripcion2").cantidadAsientos(2);
+        return new Venta().id(2L).descripcion("descripcion2").cantidadAsientos(2);
     }
 
     public static Venta getVentaRandomSampleGenerator() {
         return new Venta()
             .id(longCount.incrementAndGet())
-            .ventaIdCatedra(longCount.incrementAndGet())
             .descripcion(UUID.randomUUID().toString())
             .cantidadAsientos(intCount.incrementAndGet());
     }

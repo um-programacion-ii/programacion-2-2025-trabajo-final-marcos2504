@@ -28,9 +28,6 @@ public class Venta implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "venta_id_catedra")
-    private Long ventaIdCatedra;
-
     @NotNull
     @Column(name = "fecha_venta", nullable = false)
     private Instant fechaVenta;
@@ -78,19 +75,6 @@ public class Venta implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getVentaIdCatedra() {
-        return this.ventaIdCatedra;
-    }
-
-    public Venta ventaIdCatedra(Long ventaIdCatedra) {
-        this.setVentaIdCatedra(ventaIdCatedra);
-        return this;
-    }
-
-    public void setVentaIdCatedra(Long ventaIdCatedra) {
-        this.ventaIdCatedra = ventaIdCatedra;
     }
 
     public Instant getFechaVenta() {
@@ -252,7 +236,6 @@ public class Venta implements Serializable {
     public String toString() {
         return "Venta{" +
             "id=" + getId() +
-            ", ventaIdCatedra=" + getVentaIdCatedra() +
             ", fechaVenta='" + getFechaVenta() + "'" +
             ", resultado='" + getResultado() + "'" +
             ", descripcion='" + getDescripcion() + "'" +

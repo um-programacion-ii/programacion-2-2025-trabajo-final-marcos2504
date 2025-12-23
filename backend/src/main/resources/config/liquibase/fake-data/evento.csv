@@ -1,11 +1,11 @@
-id;id_catedra;titulo;resumen;descripcion;fecha;direccion;imagen;fila_asientos;columna_asientos;precio_entrada
-1;23049;up terribly;sadly;../fake-data/blob/hipster.txt;2025-11-13T09:41:27;forenenst yum ah;../fake-data/blob/hipster.txt;31004;30084;3549.5
-2;10946;pulp;briskly demonstrate until;../fake-data/blob/hipster.txt;2025-11-12T22:02:42;eek meh aw;../fake-data/blob/hipster.txt;421;21975;28363.66
-3;32272;hopelessly suspiciously modulo;instead for;../fake-data/blob/hipster.txt;2025-11-13T12:41:13;unto with fit;../fake-data/blob/hipster.txt;29637;31157;20713.71
-4;16490;lock and;gah busy team;../fake-data/blob/hipster.txt;2025-11-12T23:46:58;besides attest wrong;../fake-data/blob/hipster.txt;4241;30908;8067.52
-5;18754;notwithstanding nucleotidase;what;../fake-data/blob/hipster.txt;2025-11-13T15:20:36;concerning failing;../fake-data/blob/hipster.txt;1913;4565;28452.67
-6;17307;of likewise;ack;../fake-data/blob/hipster.txt;2025-11-13T13:02:53;till ah;../fake-data/blob/hipster.txt;3352;19645;11532.54
-7;11919;on upside-down provided;ugh incidentally meager;../fake-data/blob/hipster.txt;2025-11-13T04:14:24;whoever vivaciously out;../fake-data/blob/hipster.txt;6607;23380;18068.27
-8;13262;whose;aching;../fake-data/blob/hipster.txt;2025-11-13T00:06:12;teriyaki vague sadly;../fake-data/blob/hipster.txt;21831;12626;9744.52
-9;6558;statement;bathrobe;../fake-data/blob/hipster.txt;2025-11-13T09:08:33;impostor simple whoa;../fake-data/blob/hipster.txt;19053;9135;5756.08
-10;29639;vibrant thoughtfully;while properly by;../fake-data/blob/hipster.txt;2025-11-13T05:04:52;veto;../fake-data/blob/hipster.txt;14446;12080;29647.97
+id;titulo;resumen;descripcion;fecha;direccion;imagen;fila_asientos;columna_asientos;precio_entrada
+1;relaunch blah sediment;patiently;../fake-data/blob/hipster.txt;2025-11-13T03:54:25;roughly slap nor;../fake-data/blob/hipster.txt;23443;18;707.22
+2;painfully lest boo;carelessly;../fake-data/blob/hipster.txt;2025-11-12T22:17:13;shakily er;../fake-data/blob/hipster.txt;8927;17399;421.01
+3;supposing place yet;congregate firsthand;../fake-data/blob/hipster.txt;2025-11-12T23:07:53;likewise often until;../fake-data/blob/hipster.txt;22745;12562;11068.75
+4;below well-lit excluding;supposing;../fake-data/blob/hipster.txt;2025-11-13T10:02:14;without innocently;../fake-data/blob/hipster.txt;22824;32618;21058.64
+5;attest;common oof;../fake-data/blob/hipster.txt;2025-11-13T10:09:42;ramp before prudent;../fake-data/blob/hipster.txt;31;11351;29686.68
+6;understated why;aside doubter;../fake-data/blob/hipster.txt;2025-11-13T06:58:05;overplay;../fake-data/blob/hipster.txt;21198;8026;19768.2
+7;however;among duh;../fake-data/blob/hipster.txt;2025-11-13T12:49:15;if;../fake-data/blob/hipster.txt;12573;13495;8368.29
+8;whoever a;meager queasily;../fake-data/blob/hipster.txt;2025-11-13T02:58:33;vivaciously out geez;../fake-data/blob/hipster.txt;7595;28826;15227.6
+9;off plastic;woot;../fake-data/blob/hipster.txt;2025-11-13T19:27:28;as since embed;../fake-data/blob/hipster.txt;7382;948;10692.72
+10;goat unique cleverly;converse straight;../fake-data/blob/hipster.txt;2025-11-13T11:33:05;thoughtfully whoever innocently;../fake-data/blob/hipster.txt;19820;616;3353.19

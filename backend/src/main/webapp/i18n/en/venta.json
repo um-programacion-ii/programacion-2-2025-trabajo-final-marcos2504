@@ -18,7 +18,6 @@
         "title": "Venta"
       },
       "id": "ID",
-      "ventaIdCatedra": "Venta Id Catedra",
       "fechaVenta": "Fecha Venta",
       "resultado": "Resultado",
       "descripcion": "Descripcion",

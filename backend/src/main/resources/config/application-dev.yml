@@ -59,15 +59,16 @@ spring:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
+
+  # Fix compatibilidad Spring Cloud con Spring Boot 3.4.5
   cloud:
     compatibility-verifier:
-      enabled: false
+        enabled: false
 
 server:
   port: 8080
   # make sure requests the proxy uri instead of the server one
   forward-headers-strategy: native
-
 
 # ===================================================================
 # JHipster specific properties
@@ -120,3 +121,5 @@ jhipster:
 # application:
 proxy:
   base-url: http://localhost:8081/proxy
+
+# Fix compatibilidad Spring Cloud con Spring Boot 3.4.5

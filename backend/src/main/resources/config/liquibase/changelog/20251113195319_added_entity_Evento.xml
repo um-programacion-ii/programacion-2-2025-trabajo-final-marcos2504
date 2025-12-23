@@ -14,9 +14,6 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="id_catedra" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="titulo" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -69,7 +66,6 @@
                   tableName="evento"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="id_catedra" type="numeric"/>
             <column name="titulo" type="string"/>
             <column name="resumen" type="string"/>
             <column name="descripcion" type="clob"/>

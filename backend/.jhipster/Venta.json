@@ -6,10 +6,6 @@
   "dto": "mapstruct",
   "fields": [
     {
-      "fieldName": "ventaIdCatedra",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "fechaVenta",
       "fieldType": "Instant",
       "fieldValidateRules": ["required"]

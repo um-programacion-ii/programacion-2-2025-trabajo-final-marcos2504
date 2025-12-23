@@ -38,9 +38,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class EventoResourceIT {
 
-    private static final Long DEFAULT_ID_CATEDRA = 1L;
-    private static final Long UPDATED_ID_CATEDRA = 2L;
-
     private static final String DEFAULT_TITULO = "AAAAAAAAAA";
     private static final String UPDATED_TITULO = "BBBBBBBBBB";
 
@@ -101,7 +98,6 @@ class EventoResourceIT {
      */
     public static Evento createEntity() {
         return new Evento()
-            .idCatedra(DEFAULT_ID_CATEDRA)
             .titulo(DEFAULT_TITULO)
             .resumen(DEFAULT_RESUMEN)
             .descripcion(DEFAULT_DESCRIPCION)
@@ -121,7 +117,6 @@ class EventoResourceIT {
      */
     public static Evento createUpdatedEntity() {
         return new Evento()
-            .idCatedra(UPDATED_ID_CATEDRA)
             .titulo(UPDATED_TITULO)
             .resumen(UPDATED_RESUMEN)
             .descripcion(UPDATED_DESCRIPCION)
@@ -251,7 +246,6 @@ class EventoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(evento.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idCatedra").value(hasItem(DEFAULT_ID_CATEDRA.intValue())))
             .andExpect(jsonPath("$.[*].titulo").value(hasItem(DEFAULT_TITULO)))
             .andExpect(jsonPath("$.[*].resumen").value(hasItem(DEFAULT_RESUMEN)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
@@ -275,7 +269,6 @@ class EventoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(evento.getId().intValue()))
-            .andExpect(jsonPath("$.idCatedra").value(DEFAULT_ID_CATEDRA.intValue()))
             .andExpect(jsonPath("$.titulo").value(DEFAULT_TITULO))
             .andExpect(jsonPath("$.resumen").value(DEFAULT_RESUMEN))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
@@ -307,7 +300,6 @@ class EventoResourceIT {
         // Disconnect from session so that the updates on updatedEvento are not directly saved in db
         em.detach(updatedEvento);
         updatedEvento
-            .idCatedra(UPDATED_ID_CATEDRA)
             .titulo(UPDATED_TITULO)
             .resumen(UPDATED_RESUMEN)
             .descripcion(UPDATED_DESCRIPCION)
@@ -402,11 +394,7 @@ class EventoResourceIT {
         Evento partialUpdatedEvento = new Evento();
         partialUpdatedEvento.setId(evento.getId());
 
-        partialUpdatedEvento
-            .descripcion(UPDATED_DESCRIPCION)
-            .filaAsientos(UPDATED_FILA_ASIENTOS)
-            .columnaAsientos(UPDATED_COLUMNA_ASIENTOS)
-            .precioEntrada(UPDATED_PRECIO_ENTRADA);
+        partialUpdatedEvento.fecha(UPDATED_FECHA).columnaAsientos(UPDATED_COLUMNA_ASIENTOS).precioEntrada(UPDATED_PRECIO_ENTRADA);
 
         restEventoMockMvc
             .perform(
@@ -435,7 +423,6 @@ class EventoResourceIT {
         partialUpdatedEvento.setId(evento.getId());
 
         partialUpdatedEvento
-            .idCatedra(UPDATED_ID_CATEDRA)
             .titulo(UPDATED_TITULO)
             .resumen(UPDATED_RESUMEN)
             .descripcion(UPDATED_DESCRIPCION)

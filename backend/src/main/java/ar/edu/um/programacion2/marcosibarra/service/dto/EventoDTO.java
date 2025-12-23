@@ -15,8 +15,6 @@ public class EventoDTO implements Serializable {
 
     private Long id;
 
-    private Long idCatedra;
-
     @NotNull
     private String titulo;
 
@@ -48,14 +46,6 @@ public class EventoDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdCatedra() {
-        return idCatedra;
-    }
-
-    public void setIdCatedra(Long idCatedra) {
-        this.idCatedra = idCatedra;
     }
 
     public String getTitulo() {
@@ -164,7 +154,6 @@ public class EventoDTO implements Serializable {
     public String toString() {
         return "EventoDTO{" +
             "id=" + getId() +
-            ", idCatedra=" + getIdCatedra() +
             ", titulo='" + getTitulo() + "'" +
             ", resumen='" + getResumen() + "'" +
             ", descripcion='" + getDescripcion() + "'" +

@@ -3,7 +3,6 @@ import { IEventoTipo } from 'app/shared/model/evento-tipo.model';
 
 export interface IEvento {
   id?: number;
-  idCatedra?: number | null;
   titulo?: string;
   resumen?: string | null;
   descripcion?: string | null;

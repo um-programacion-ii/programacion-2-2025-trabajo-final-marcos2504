@@ -33,12 +33,6 @@ export const EventoDetail = () => {
           </dt>
           <dd>{eventoEntity.id}</dd>
           <dt>
-            <span id="idCatedra">
-              <Translate contentKey="eventosApp.evento.idCatedra">Id Catedra</Translate>
-            </span>
-          </dt>
-          <dd>{eventoEntity.idCatedra}</dd>
-          <dt>
             <span id="titulo">
               <Translate contentKey="eventosApp.evento.titulo">Titulo</Translate>
             </span>
