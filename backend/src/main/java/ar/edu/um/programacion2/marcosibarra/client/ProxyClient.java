@@ -1,6 +1,7 @@
 package ar.edu.um.programacion2.marcosibarra.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,18 +57,8 @@ public interface ProxyClient {
     @PostMapping("/eventos/realizar-venta")
     Map<String, Object> realizarVenta(@RequestBody Map<String, Object> request);
 
-    /**
-     * GET /asientos/{eventoId}/{fila}/{columna}
-     * Consulta el estado de un asiento específico en Redis de cátedra
-     *
-     * Response: "Libre" | "Ocupado" | "Bloqueado" | etc.
-     */
-    @GetMapping("/asientos/{eventoId}/{fila}/{columna}")
-    String getEstadoAsiento(
-        @PathVariable("eventoId") Long eventoId,
-        @PathVariable("fila") Integer fila,
-        @PathVariable("columna") Integer columna
-    );
+    @GetMapping(value = "/asientos/clave/{clave}", produces = MediaType.APPLICATION_JSON_VALUE)
+    Map<String, Object> getAsientosPorClave(@PathVariable("clave") String clave);
 
     /**
      * GET /eventos/ventas
@@ -83,3 +74,4 @@ public interface ProxyClient {
     @GetMapping("/eventos/ventas/{id}")
     Map<String, Object> getVenta(@PathVariable("id") Long id);
 }
+
