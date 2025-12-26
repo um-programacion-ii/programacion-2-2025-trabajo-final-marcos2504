@@ -42,7 +42,7 @@ public class VentaProcessService {
 
     /**
      * Bloquea asientos para un evento.
-     * Delega directamente al proxy (Redis).
+     * Delega directamente al proxy
      */
     public Map<String, Object> bloquearAsientos(Long eventoId, List<Map<String, Integer>> asientosCoord, String username) {
         log.info("Bloqueando {} asientos para evento {} por usuario {}",
