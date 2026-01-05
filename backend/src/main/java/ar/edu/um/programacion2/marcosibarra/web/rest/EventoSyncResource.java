@@ -54,40 +54,7 @@ public class EventoSyncResource {
         }
     }
 
-    /**
-     * POST /api/sync/eventos/{id} : Sincroniza un evento específico
-     *
-     * @param id ID del evento en cátedra
-     * @return Resultado de la sincronización
-     */
-    @PostMapping("/eventos/{id}")
-    public ResponseEntity<Map<String, Object>> sincronizarEventoPorId(@PathVariable Long id) {
-        log.info("REST request para sincronizar evento: {}", id);
 
-        try {
-            eventoSyncService.sincronizarEventoPorId(id);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", true);
-            response.put("message", "Evento " + id + " sincronizado exitosamente");
-
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            log.error("Error sincronizando evento {}", id, e);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", false);
-            response.put("message", "Error sincronizando evento: " + e.getMessage());
-
-            return ResponseEntity.internalServerError().body(response);
-        }
-    }
-
-    /**
-     * GET /api/sync/test : Verifica que el proxy esté accesible
-     *
-     * @return Estado de conexión con el proxy
-     */
     @GetMapping("/test")
     public ResponseEntity<Map<String, Object>> testConexionProxy() {
         log.info("REST request para probar conexión con proxy");
@@ -99,5 +66,31 @@ public class EventoSyncResource {
 
         return ResponseEntity.ok(response);
     }
+    @PostMapping("/eventos/trigger")
+    public ResponseEntity<Map<String, Object>> triggerSyncFromKafka() {
+        log.info(" Notificación recibida desde EventosProxy - Iniciando sincronización automática");
+
+        try {
+            eventoSyncService.sincronizarTodosLosEventos();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "Sincronización automática completada exitosamente");
+            response.put("triggered_by", "kafka");
+
+            log.info("✅ Sincronización automática completada");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error(" Error en sincronización automática", e);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Error en sincronización automática: " + e.getMessage());
+            response.put("triggered_by", "kafka");
+
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
 }
+
 

@@ -16,3 +16,18 @@ spring:
 
   kafka:
     bootstrap-servers: 192.168.194.250:9092
+    consumer:
+      group-id: eventos-proxy-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual
+
+  # Configuración personalizada
+  eventos:
+    kafka:
+      topic: eventos-actualizacion
+    backend:
+      url: http://localhost:8080
+      sync-endpoint: /api/sync/eventos/trigger

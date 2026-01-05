@@ -1,5 +1,6 @@
 package ar.edu.um.programacion.marcos2504.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -53,7 +54,11 @@ class BottomBarScreen : Screen {
                         }
                     }
                 ) { paddingValues ->
-                    CurrentTab()
+                    androidx.compose.foundation.layout.Box(
+                        modifier = androidx.compose.ui.Modifier.padding(paddingValues)
+                    ) {
+                        CurrentTab()
+                    }
                 }
             }
         }

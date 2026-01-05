@@ -3,6 +3,7 @@ package ar.edu.um.programacion2.marcosibarra.web.rest;
 import ar.edu.um.programacion2.marcosibarra.repository.VentaRepository;
 import ar.edu.um.programacion2.marcosibarra.service.VentaService;
 import ar.edu.um.programacion2.marcosibarra.service.dto.VentaDTO;
+import ar.edu.um.programacion2.marcosibarra.service.mapper.VentaMapper;
 import ar.edu.um.programacion2.marcosibarra.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -42,9 +43,12 @@ public class VentaResource {
 
     private final VentaRepository ventaRepository;
 
-    public VentaResource(VentaService ventaService, VentaRepository ventaRepository) {
+    private final VentaMapper ventaMapper;
+
+    public VentaResource(VentaService ventaService, VentaRepository ventaRepository, VentaMapper ventaMapper) {
         this.ventaService = ventaService;
         this.ventaRepository = ventaRepository;
+        this.ventaMapper = ventaMapper;
     }
 
     /**
@@ -184,5 +188,15 @@ public class VentaResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @GetMapping("/mis-compras")
+    public ResponseEntity<List<VentaDTO>> getMisCompras() {
+        LOG.debug("REST request to get Ventas del usuario autenticado");
+        List<VentaDTO> ventas = ventaRepository.findByUsuarioIsCurrentUser()
+            .stream()
+            .map(ventaMapper::toDto)
+            .toList();
+
+        return ResponseEntity.ok(ventas);
     }
 }

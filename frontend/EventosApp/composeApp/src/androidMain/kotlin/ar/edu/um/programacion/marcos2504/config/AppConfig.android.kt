@@ -10,6 +10,6 @@ package ar.edu.um.programacion.marcos2504.config
 actual object AppConfig {
     // Para emulador Android usa 10.0.2.2
     // Para dispositivo físico usa la IP de tu computadora
-    actual val BASE_URL: String = "http://192.168.100.12:8080"
+    actual val BASE_URL: String = "http://10.0.2.2:8080"
 }
 
