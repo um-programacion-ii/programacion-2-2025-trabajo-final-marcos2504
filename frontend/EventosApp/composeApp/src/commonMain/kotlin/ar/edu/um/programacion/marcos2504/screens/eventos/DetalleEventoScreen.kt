@@ -55,7 +55,23 @@ class DetalleEventoScreen(private val eventoId: Long) : Screen {
                 TopAppBar(
                     title = { Text("Detalle del Evento") },
                     navigationIcon = {
-                        IconButton(onClick = { navigator.pop() }) {
+                        IconButton(onClick = {
+                            // Retroceder estado de sesión antes de salir
+                            scope.launch {
+                                val result = Api.client.retrocederEstadoSesion()
+                                result.fold(
+                                    onSuccess = { sesion ->
+                                        println("⬅️ Estado retrocedido a: ${sesion.estadoSesion}")
+                                        navigator.pop()
+                                    },
+                                    onFailure = { error ->
+                                        // Si falla, navegar igual
+                                        println("⚠️ Error al retroceder estado: ${error.message}")
+                                        navigator.pop()
+                                    }
+                                )
+                            }
+                        }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Volver")
                         }
                     }
@@ -103,7 +119,21 @@ class DetalleEventoScreen(private val eventoId: Long) : Screen {
                     EventoDetalleContent(
                         evento = evento!!,
                         onSeleccionarAsientos = {
-                            navigator.push(SeleccionAsientosScreen(evento!!))
+                            // Llamar a sesión para marcar evento seleccionado
+                            scope.launch {
+                                val result = Api.client.seleccionarEvento(eventoId)
+                                result.fold(
+                                    onSuccess = { sesion ->
+                                        println("✅ Evento seleccionado. Estado: ${sesion.estadoSesion}")
+                                        navigator.push(SeleccionAsientosScreen(evento!!))
+                                    },
+                                    onFailure = { error ->
+                                        // Si falla, navegar igual (no bloquear al usuario)
+                                        println("⚠️ Error al actualizar sesión: ${error.message}")
+                                        navigator.push(SeleccionAsientosScreen(evento!!))
+                                    }
+                                )
+                            }
                         },
                         modifier = Modifier.padding(paddingValues)
                     )
@@ -284,4 +314,3 @@ fun formatFecha(fechaString: String): String {
         fechaString
     }
 }
-

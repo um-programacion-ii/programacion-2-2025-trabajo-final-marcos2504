@@ -1,7 +1,10 @@
 package ar.edu.um.programacion2.marcosibarra.web.rest;
 
+import ar.edu.um.programacion2.marcosibarra.domain.User;
 import ar.edu.um.programacion2.marcosibarra.repository.SesionRepository;
+import ar.edu.um.programacion2.marcosibarra.service.SesionManagementService;
 import ar.edu.um.programacion2.marcosibarra.service.SesionService;
+import ar.edu.um.programacion2.marcosibarra.service.UserService;
 import ar.edu.um.programacion2.marcosibarra.service.dto.SesionDTO;
 import ar.edu.um.programacion2.marcosibarra.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
@@ -41,12 +44,120 @@ public class SesionResource {
     private final SesionService sesionService;
 
     private final SesionRepository sesionRepository;
+    private final SesionManagementService sesionManagementService;
+    private final UserService userService;
 
-    public SesionResource(SesionService sesionService, SesionRepository sesionRepository) {
+    public SesionResource(SesionService sesionService, SesionRepository sesionRepository,SesionManagementService sesionManagementService, UserService userService  ) {
         this.sesionService = sesionService;
         this.sesionRepository = sesionRepository;
+        this.sesionManagementService = sesionManagementService;
+        this.userService = userService;
+    }
+    /**
+     * {@code GET  /sesions/actual} : Obtiene la sesión activa del usuario autenticado
+     * Si no existe sesión activa, crea una nueva en estado LISTA_EVENTOS
+     *
+     * @return la sesión activa del usuario
+     */
+    @GetMapping("/actual")
+    public ResponseEntity<SesionDTO> obtenerSesionActual() {
+        LOG.debug("REST request para obtener sesión actual del usuario autenticado");
+
+        User usuario = userService.getUserWithAuthorities()
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        SesionDTO sesion = sesionManagementService.obtenerOCrearSesion(usuario);
+
+        return ResponseEntity.ok(sesion);
+    }
+    /**
+     * {@code POST  /sesions/seleccionar-evento} : Actualiza sesión cuando usuario selecciona un evento
+     *
+     * @param eventoId el ID del evento seleccionado
+     * @return la sesión actualizada
+     */
+    @PostMapping("/seleccionar-evento")
+    public ResponseEntity<SesionDTO> seleccionarEvento(@RequestParam Long eventoId) {
+        LOG.debug("REST request para seleccionar evento: {}", eventoId);
+
+        User usuario = userService.getUserWithAuthorities()
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        SesionDTO sesion = sesionManagementService.seleccionarEvento(usuario, eventoId);
+
+        return ResponseEntity.ok(sesion);
+    }
+    /**
+     * {@code POST  /sesions/bloquear-asientos} : Actualiza sesión cuando usuario bloquea asientos
+     *
+     * @param asientosJson JSON string con los asientos bloqueados
+     * @param cantidad cantidad de asientos bloqueados
+     * @return la sesión actualizada
+     */
+    @PostMapping("/bloquear-asientos")
+    public ResponseEntity<SesionDTO> bloquearAsientos(
+        @RequestParam String asientosJson,
+        @RequestParam Integer cantidad
+    ) {
+        LOG.debug("REST request para bloquear {} asientos", cantidad);
+
+        User usuario = userService.getUserWithAuthorities()
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        SesionDTO sesion = sesionManagementService.bloquearAsientos(usuario, asientosJson, cantidad);
+
+        return ResponseEntity.ok(sesion);
     }
 
+    /**
+     * {@code POST  /sesions/completar-datos} : Actualiza sesión cuando usuario completa datos
+     *
+     * @return la sesión actualizada
+     */
+    @PostMapping("/completar-datos")
+    public ResponseEntity<SesionDTO> completarDatos() {
+        LOG.debug("REST request para completar datos de asientos");
+
+        User usuario = userService.getUserWithAuthorities()
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        SesionDTO sesion = sesionManagementService.completarDatos(usuario);
+
+        return ResponseEntity.ok(sesion);
+    }
+
+    /**
+     * {@code POST  /sesions/invalidar} : Invalida la sesión activa del usuario (logout)
+     *
+     * @return confirmación de invalidación
+     */
+    @PostMapping("/invalidar")
+    public ResponseEntity<Void> invalidarSesion() {
+        LOG.debug("REST request para invalidar sesión del usuario autenticado");
+
+        User usuario = userService.getUserWithAuthorities()
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        sesionManagementService.invalidarSesion(usuario);
+
+        return ResponseEntity.ok().build();
+    }
+    /**
+     * {@code POST  /sesions/retroceder} : Retrocede al estado anterior en el flujo
+     *
+     * @return la sesión actualizada con el estado anterior
+     */
+    @PostMapping("/retroceder")
+    public ResponseEntity<SesionDTO> retroceder() {
+        LOG.debug("REST request para retroceder al estado anterior");
+
+        User usuario = userService.getUserWithAuthorities()
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        SesionDTO sesion = sesionManagementService.retroceder(usuario);
+
+        return ResponseEntity.ok(sesion);
+    }
     /**
      * {@code POST  /sesions} : Create a new sesion.
      *

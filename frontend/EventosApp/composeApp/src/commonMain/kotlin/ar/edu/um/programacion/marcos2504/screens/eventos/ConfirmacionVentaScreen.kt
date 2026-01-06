@@ -57,7 +57,23 @@ class ConfirmacionVentaScreen(
                 TopAppBar(
                     title = { Text("Confirmar Compra") },
                     navigationIcon = {
-                        IconButton(onClick = { navigator.pop() }) {
+                        IconButton(onClick = {
+                            // Retroceder estado de sesión antes de salir
+                            scope.launch {
+                                val result = Api.client.retrocederEstadoSesion()
+                                result.fold(
+                                    onSuccess = { sesion ->
+                                        println("⬅️ Estado retrocedido a: ${sesion.estadoSesion}")
+                                        navigator.pop()
+                                    },
+                                    onFailure = { error ->
+                                        // Si falla, navegar igual
+                                        println("⚠️ Error al retroceder estado: ${error.message}")
+                                        navigator.pop()
+                                    }
+                                )
+                            }
+                        }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Volver")
                         }
                     }

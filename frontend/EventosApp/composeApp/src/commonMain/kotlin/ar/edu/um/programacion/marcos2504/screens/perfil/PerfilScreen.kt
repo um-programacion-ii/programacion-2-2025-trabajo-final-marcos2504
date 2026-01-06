@@ -74,8 +74,24 @@ fun PerfilScreen() {
             confirmButton = {
                 Button(
                     onClick = {
-                        Api.client.clearAuthToken()
-                        navigator.replaceAll(LoginScreen())
+                        scope.launch {
+                            // Primero invalidar sesión en el backend
+                            val result = Api.client.invalidarSesion()
+                            result.fold(
+                                onSuccess = {
+                                    println("✅ Sesión invalidada correctamente")
+                                    // Limpiar token y navegar
+                                    Api.client.clearAuthToken()
+                                    navigator.replaceAll(LoginScreen())
+                                },
+                                onFailure = { error ->
+                                    // Si falla, limpiar token y navegar igual
+                                    println("⚠️ Error al invalidar sesión: ${error.message}")
+                                    Api.client.clearAuthToken()
+                                    navigator.replaceAll(LoginScreen())
+                                }
+                            )
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.error

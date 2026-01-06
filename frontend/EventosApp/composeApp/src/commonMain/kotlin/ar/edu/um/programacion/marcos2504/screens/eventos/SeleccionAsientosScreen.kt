@@ -18,11 +18,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.um.programacion.marcos2504.api.Api
 import ar.edu.um.programacion.marcos2504.models.AsientoRedis
+import ar.edu.um.programacion.marcos2504.models.AsientoSeleccionado
 import ar.edu.um.programacion.marcos2504.models.Evento
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
 
 class SeleccionAsientosScreen(private val evento: Evento) : Screen {
 
@@ -71,7 +74,23 @@ class SeleccionAsientosScreen(private val evento: Evento) : Screen {
                 TopAppBar(
                     title = { Text(evento.titulo) },
                     navigationIcon = {
-                        IconButton(onClick = { navigator.pop() }) {
+                        IconButton(onClick = {
+                            // Retroceder estado de sesión antes de salir
+                            scope.launch {
+                                val result = Api.client.retrocederEstadoSesion()
+                                result.fold(
+                                    onSuccess = { sesion ->
+                                        println("⬅️ Estado retrocedido a: ${sesion.estadoSesion}")
+                                        navigator.pop()
+                                    },
+                                    onFailure = { error ->
+                                        // Si falla, navegar igual
+                                        println("⚠️ Error al retroceder estado: ${error.message}")
+                                        navigator.pop()
+                                    }
+                                )
+                            }
+                        }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Volver")
                         }
                     }
@@ -205,12 +224,46 @@ class SeleccionAsientosScreen(private val evento: Evento) : Screen {
                                         Button(
                                             onClick = {
                                                 println("Continuar con ${asientosSeleccionados.size} asientos")
-                                                navigator.push(
-                                                    ConfirmacionVentaScreen(
-                                                        evento = evento,
-                                                        asientosSeleccionados = asientosSeleccionados.toList()
+
+                                                // Convertir asientos seleccionados al formato requerido para la sesión
+                                                val asientosParaSesion = asientosSeleccionados.mapIndexed { index, (fila, columna) ->
+                                                    AsientoSeleccionado(
+                                                        id = index.toLong(),
+                                                        fila = (fila + 1).toString(), // Convertir a 1-based
+                                                        numero = columna + 1 // Convertir a 1-based
                                                     )
-                                                )
+                                                }
+
+                                                scope.launch {
+                                                    // Convertir a JSON para el endpoint
+                                                    val asientosJson = Json.encodeToString(asientosParaSesion)
+                                                    val result = Api.client.bloquearAsientosSesion(
+                                                        asientosJson = asientosJson,
+                                                        cantidad = asientosSeleccionados.size
+                                                    )
+
+                                                    result.fold(
+                                                        onSuccess = { sesion ->
+                                                            println("✅ Asientos bloqueados. Estado: ${sesion.estadoSesion}")
+                                                            navigator.push(
+                                                                ConfirmacionVentaScreen(
+                                                                    evento = evento,
+                                                                    asientosSeleccionados = asientosSeleccionados.toList()
+                                                                )
+                                                            )
+                                                        },
+                                                        onFailure = { error ->
+                                                            // Si falla, navegar igual
+                                                            println("⚠️ Error al actualizar sesión: ${error.message}")
+                                                            navigator.push(
+                                                                ConfirmacionVentaScreen(
+                                                                    evento = evento,
+                                                                    asientosSeleccionados = asientosSeleccionados.toList()
+                                                                )
+                                                            )
+                                                        }
+                                                    )
+                                                }
                                             },
                                             modifier = Modifier.fillMaxWidth(),
                                             enabled = asientosSeleccionados.size in 1..4

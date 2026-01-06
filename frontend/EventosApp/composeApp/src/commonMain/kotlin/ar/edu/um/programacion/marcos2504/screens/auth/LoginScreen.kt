@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import ar.edu.um.programacion.marcos2504.api.Api
+import ar.edu.um.programacion.marcos2504.models.EstadoSesion
 import ar.edu.um.programacion.marcos2504.models.LoginRequest
 import ar.edu.um.programacion.marcos2504.navigation.BottomBarScreen
 import cafe.adriel.voyager.core.screen.Screen
@@ -86,11 +87,88 @@ class LoginScreen : Screen {
                                     password = password
                                 )
                             )
-                            
+
                             result.fold(
                                 onSuccess = {
-                                    // Navegar a la pantalla principal
-                                    navigator.replaceAll(BottomBarScreen())
+                                    // Login exitoso, obtener sesión para restaurar estado
+                                    scope.launch {
+                                        val sesionResult = Api.client.obtenerSesionActual()
+                                        sesionResult.fold(
+                                            onSuccess = { sesion ->
+                                                println("✅ Sesión obtenida: ${sesion.estadoSesion}")
+
+                                                // Restaurar según el estado
+                                                when (sesion.estadoSesion) {
+                                                    EstadoSesion.EVENTO_SELECCIONADO -> {
+                                                        // Cargar el evento y navegar a DetalleEventoScreen
+                                                        sesion.eventoSeleccionado?.let { eventoId ->
+                                                            println("🔄 Restaurando a DetalleEventoScreen para evento $eventoId")
+                                                            val eventoResult = Api.client.getEvento(eventoId)
+                                                            eventoResult.fold(
+                                                                onSuccess = { evento ->
+                                                                    isLoading = false
+                                                                    navigator.replaceAll(BottomBarScreen())
+                                                                    navigator.push(ar.edu.um.programacion.marcos2504.screens.eventos.DetalleEventoScreen(eventoId))
+                                                                },
+                                                                onFailure = { error ->
+                                                                    println("⚠️ Error al cargar evento: ${error.message}")
+                                                                    isLoading = false
+                                                                    navigator.replaceAll(BottomBarScreen())
+                                                                }
+                                                            )
+                                                        } ?: run {
+                                                            isLoading = false
+                                                            navigator.replaceAll(BottomBarScreen())
+                                                        }
+                                                    }
+
+                                                    EstadoSesion.ASIENTOS_BLOQUEADOS -> {
+                                                        // Cargar el evento y navegar a SeleccionAsientosScreen
+                                                        sesion.eventoSeleccionado?.let { eventoId ->
+                                                            println("🔄 Restaurando a SeleccionAsientosScreen para evento $eventoId")
+                                                            val eventoResult = Api.client.getEvento(eventoId)
+                                                            eventoResult.fold(
+                                                                onSuccess = { evento ->
+                                                                    isLoading = false
+                                                                    navigator.replaceAll(BottomBarScreen())
+                                                                    navigator.push(ar.edu.um.programacion.marcos2504.screens.eventos.DetalleEventoScreen(eventoId))
+                                                                    navigator.push(ar.edu.um.programacion.marcos2504.screens.eventos.SeleccionAsientosScreen(evento))
+                                                                },
+                                                                onFailure = { error ->
+                                                                    println("⚠️ Error al cargar evento: ${error.message}")
+                                                                    isLoading = false
+                                                                    navigator.replaceAll(BottomBarScreen())
+                                                                }
+                                                            )
+                                                        } ?: run {
+                                                            isLoading = false
+                                                            navigator.replaceAll(BottomBarScreen())
+                                                        }
+                                                    }
+
+                                                    EstadoSesion.DATOS_COMPLETOS -> {
+                                                        // Por ahora ir al inicio (falta implementar pantalla de datos)
+                                                        println("🔄 Estado DATOS_COMPLETOS - navegando a inicio")
+                                                        isLoading = false
+                                                        navigator.replaceAll(BottomBarScreen())
+                                                    }
+
+                                                    else -> {
+                                                        // Para otros estados, ir al inicio
+                                                        println("🏠 Navegando a inicio (estado: ${sesion.estadoSesion})")
+                                                        isLoading = false
+                                                        navigator.replaceAll(BottomBarScreen())
+                                                    }
+                                                }
+                                            },
+                                            onFailure = { error ->
+                                                // Si falla obtener sesión, navegar a inicio
+                                                println("⚠️ Error al obtener sesión: ${error.message}")
+                                                isLoading = false
+                                                navigator.replaceAll(BottomBarScreen())
+                                            }
+                                        )
+                                    }
                                 },
                                 onFailure = { error ->
                                     errorMessage = "Error al iniciar sesión: ${error.message}"
@@ -111,9 +189,9 @@ class LoginScreen : Screen {
                         Text("Iniciar Sesión")
                     }
                 }
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 TextButton(
                     onClick = { navigator.push(RegisterScreen()) },
                     enabled = !isLoading

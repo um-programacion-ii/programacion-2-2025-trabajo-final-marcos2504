@@ -3,6 +3,8 @@ package ar.edu.um.programacion2.marcosibarra.repository;
 import ar.edu.um.programacion2.marcosibarra.domain.Sesion;
 import java.util.List;
 import java.util.Optional;
+
+import ar.edu.um.programacion2.marcosibarra.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Repository;
 public interface SesionRepository extends JpaRepository<Sesion, Long> {
     @Query("select sesion from Sesion sesion where sesion.usuario.login = ?#{authentication.name}")
     List<Sesion> findByUsuarioIsCurrentUser();
+
+    Optional<Sesion> findByUsuarioAndActivaTrue(User usuario);
 
     default Optional<Sesion> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);
