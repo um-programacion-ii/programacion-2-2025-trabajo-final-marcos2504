@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20251113195619"
+  },
+  "applications": ["eventosApp"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "tokenJWT",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fechaInicio",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fechaExpiracion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "activa",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ultimoAcceso",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "eventoSeleccionado",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estadoSesion",
+      "fieldType": "EstadoSesion",
+      "fieldValues": "LISTA_EVENTOS,EVENTO_SELECCIONADO,ASIENTOS_BLOQUEADOS,DATOS_COMPLETOS,VENTA_CONFIRMADA,EXPIRADA"
+    },
+    {
+      "fieldName": "asientosSeleccionados",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "cantidadAsientos",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Sesion",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "usuario",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

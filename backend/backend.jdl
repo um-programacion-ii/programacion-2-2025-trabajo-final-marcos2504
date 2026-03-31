@@ -1,0 +1,117 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName eventosApp
+    packageName ar.edu.um.programacion2.marcosibarra
+    buildTool maven
+    databaseType sql
+    devDatabaseType h2Disk
+    prodDatabaseType mysql
+    cacheProvider ehcache
+    enableHibernateCache true
+    enableTranslation true
+    nativeLanguage es
+    languages [es, en]
+    clientFramework react
+    withAdminUi true
+    jhipsterVersion "8.11.0"
+  }
+  entities *
+}
+
+entity EventoTipo {
+  nombre String required,
+  descripcion String
+}
+
+entity Integrante {
+  nombre String required,
+  apellido String required,
+  identificacion String
+}
+
+entity Evento {
+  idCatedra Long,
+  titulo String required,
+  resumen String,
+  descripcion TextBlob,
+  fecha Instant required,
+  direccion String,
+  imagen TextBlob,
+  filaAsientos Integer,
+  columnaAsientos Integer,
+  precioEntrada BigDecimal required
+}
+
+entity Asiento {
+  fila Integer required,
+  columna Integer required,
+  estadoAsiento EstadoAsiento required,
+  persona String,
+  bloqueadoHasta Instant
+}
+
+enum EstadoAsiento {
+  LIBRE,
+  OCUPADO,
+  BLOQUEADO,
+  YA_BLOQUEADO,
+  NO_VALIDO
+}
+
+entity Venta {
+  ventaIdCatedra Long,
+  fechaVenta Instant required,
+  resultado Boolean required,
+  descripcion String,
+  precioVenta BigDecimal required,
+  cantidadAsientos Integer,
+  estadoVenta EstadoVenta
+}
+
+enum EstadoVenta {
+  PENDIENTE,
+  CONFIRMADA,
+  RECHAZADA,
+  ERROR_SINCRONIZACION
+}
+
+entity Sesion {
+  tokenJWT TextBlob required,
+  fechaInicio Instant required,
+  fechaExpiracion Instant,
+  activa Boolean required,
+  ultimoAcceso Instant,
+  eventoSeleccionado Long,
+  estadoSesion EstadoSesion,
+  asientosSeleccionados TextBlob,
+  cantidadAsientos Integer
+}
+
+enum EstadoSesion {
+  LISTA_EVENTOS,
+  EVENTO_SELECCIONADO,
+  ASIENTOS_BLOQUEADOS,
+  DATOS_COMPLETOS,
+  VENTA_CONFIRMADA,
+  EXPIRADA
+}
+
+relationship ManyToOne {
+  Evento{tipo} to EventoTipo,
+  Venta{usuario(login)} to User with builtInEntity,
+  Sesion{usuario(login)} to User with builtInEntity
+}
+
+relationship OneToMany {
+  Evento{integrante} to Integrante{evento},
+  Evento{asiento} to Asiento{evento},
+  Evento{venta} to Venta{evento},
+  Venta{asiento} to Asiento{venta}
+}
+
+paginate all with pagination
+service all with serviceClass
+dto all with mapstruct
+

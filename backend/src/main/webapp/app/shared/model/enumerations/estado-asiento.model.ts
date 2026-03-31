@@ -1,0 +1,11 @@
+export enum EstadoAsiento {
+  LIBRE = 'LIBRE',
+
+  OCUPADO = 'OCUPADO',
+
+  BLOQUEADO = 'BLOQUEADO',
+
+  YA_BLOQUEADO = 'YA_BLOQUEADO',
+
+  NO_VALIDO = 'NO_VALIDO',
+}

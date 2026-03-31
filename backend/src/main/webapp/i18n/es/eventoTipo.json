@@ -1,0 +1,25 @@
+{
+  "eventosApp": {
+    "eventoTipo": {
+      "home": {
+        "title": "Evento Tipos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Evento Tipo",
+        "createOrEditLabel": "Crear o editar Evento Tipo",
+        "notFound": "Ningún Evento Tipos encontrado"
+      },
+      "created": "Un nuevo Evento Tipo ha sido creado con el identificador {{ param }}",
+      "updated": "Un Evento Tipo ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Evento Tipo ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Evento Tipo {{ id }}?"
+      },
+      "detail": {
+        "title": "Evento Tipo"
+      },
+      "id": "ID",
+      "nombre": "Nombre",
+      "descripcion": "Descripcion"
+    }
+  }
+}
